@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { Footer, Header } from './components'
 
 function App() {
   return (
     <div className='App'>
-      <div></div>
+      <Header />
+      <Footer />
     </div>
   )
 }
