@@ -11,7 +11,12 @@ export default function Header({ children: slides }) {
   return (
     <header>
       <main className='relative overflow-hidden'>
-        <div className='flex '>{slides}</div>
+        <div
+          className='flex transition-transform ease-out duration-500'
+          style={{ transform: `translateX(-${curr * 100}%)` }}
+        >
+          {slides}
+        </div>
         <div className='absolute bottom-4 right-0 left-0 flex items-center justify-center gap-2'>
           {slides.map((item, i) => (
             <div
