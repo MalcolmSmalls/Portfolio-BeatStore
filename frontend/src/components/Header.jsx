@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default function Header({ children: slides }) {
+export default function Header({
+  children: slides,
+  autoSlide = false,
+  autoSlideInterval = 10000,
+}) {
   const [curr, setCurr] = useState(0)
   const goToIndex = (e) => {
-    setCurr(e.target.id)
+    setCurr(Number(e.target.id))
   }
-  const next = () => {
+  const next = () =>
     setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1))
-  }
+
+  useEffect(() => {
+    if (!autoSlide) return
+    const slideInterval = setInterval(next, autoSlideInterval)
+    return () => clearInterval(slideInterval)
+  }, [])
   return (
     <header>
       <main className='relative overflow-hidden'>
@@ -25,7 +34,7 @@ export default function Header({ children: slides }) {
               onClick={(e) => goToIndex(e)}
               className={`
             transition-all w-2 h-2 bg-white rounded-full
-            ${curr === i ? 'p-2' : 'bg-opacity-50'}
+            ${curr === i ? 'p-1' : 'bg-opacity-50'}
             `}
             />
           ))}

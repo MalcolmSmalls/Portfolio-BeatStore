@@ -7,7 +7,7 @@ function App() {
   return (
     <div className='App'>
       <div>
-        <Header>
+        <Header autoSlide={true}>
           {slides.map((s) => (
             <div
               className='flex-none h-screen w-screen'
