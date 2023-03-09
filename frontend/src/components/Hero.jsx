@@ -18,7 +18,6 @@ export default function Hero({
 
   useEffect(() => {
     if (!autoSlide) return
-    console.log(subTextVisibility)
     const slideInterval = setInterval(next, autoSlideInterval)
     return () => clearInterval(slideInterval)
   }, [curr])
