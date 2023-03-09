@@ -21,35 +21,46 @@ export default function Hero({
     console.log(subTextVisibility)
     const slideInterval = setInterval(next, autoSlideInterval)
     return () => clearInterval(slideInterval)
-  }, [])
+  }, [curr])
   return (
     <header>
       <main className='relative overflow-hidden'>
         <div
           className='flex transition-transform ease-out duration-500'
           style={{ transform: `translateX(-${curr * 100}%)` }}
-          onTransitionEnd={() => console.log('woah')}
         >
           {slides}
         </div>
         <div className='absolute flex flex-col justify-center items-center w-full h-full top-1'>
-          <h1
-            key={slideArr[curr].title}
-            className=' text-white uppercase text-[60px] font-PressStart animate-fade-in-up'
-            onAnimationEnd={() => setSubTextVisibility(true)}
-          >
-            {slideArr[curr].title}
-          </h1>
-          <h2
-            key={slideArr[curr].subText}
-            className={
-              subTextVisibility
-                ? 'animate-fade-in-down text-white uppercase text-[30px] tracking-widest '
-                : 'invisible text-white uppercase text-[30px] tracking-widest '
-            }
-          >
-            {slideArr[curr].subText}
-          </h2>
+          {slideArr[curr].title ? (
+            <h1
+              key={slideArr[curr].title}
+              className=' text-white uppercase text-[60px] font-PressStart animate-fade-in-up'
+              onAnimationEnd={() => setSubTextVisibility(true)}
+            >
+              {slideArr[curr].title}
+            </h1>
+          ) : null}
+
+          {slideArr[curr].title ? (
+            <h2
+              key={slideArr[curr].subText}
+              className={
+                subTextVisibility
+                  ? 'animate-fade-in-down text-white uppercase text-[30px] tracking-widest '
+                  : 'invisible text-white uppercase text-[30px] tracking-widest '
+              }
+            >
+              {slideArr[curr].subText}
+            </h2>
+          ) : (
+            <h2
+              key={slideArr[curr].subText}
+              className='animate-fade-in text-white uppercase text-[30px] tracking-widest '
+            >
+              {slideArr[curr].subText}
+            </h2>
+          )}
         </div>
 
         <div className='absolute bottom-4 right-0 left-0 flex items-center justify-center gap-2'>
