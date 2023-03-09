@@ -4,17 +4,21 @@ export default function Hero({
   children: slides,
   autoSlide = false,
   autoSlideInterval = 10000,
+  slideArr,
 }) {
   const [curr, setCurr] = useState(0)
   const [subTextVisibility, setSubTextVisibility] = useState(false)
   const goToIndex = (e) => {
     setCurr(Number(e.target.id))
   }
-  const next = () =>
+  const next = () => {
     setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1))
+    setSubTextVisibility(false)
+  }
 
   useEffect(() => {
     if (!autoSlide) return
+    console.log(subTextVisibility)
     const slideInterval = setInterval(next, autoSlideInterval)
     return () => clearInterval(slideInterval)
   }, [])
@@ -24,25 +28,27 @@ export default function Hero({
         <div
           className='flex transition-transform ease-out duration-500'
           style={{ transform: `translateX(-${curr * 100}%)` }}
-          onTransitionEnd={() => console.log('big boiii')}
+          onTransitionEnd={() => console.log('woah')}
         >
           {slides}
         </div>
         <div className='absolute flex flex-col justify-center items-center w-full h-full top-1'>
           <h1
+            key={slideArr[curr].title}
             className=' text-white uppercase text-[60px] font-PressStart animate-fade-in-up'
             onAnimationEnd={() => setSubTextVisibility(true)}
           >
-            Malcolm Smalls
+            {slideArr[curr].title}
           </h1>
           <h2
+            key={slideArr[curr].subText}
             className={
               subTextVisibility
                 ? 'animate-fade-in-down text-white uppercase text-[30px] tracking-widest '
                 : 'invisible text-white uppercase text-[30px] tracking-widest '
             }
           >
-            Music Producer / Songwriter
+            {slideArr[curr].subText}
           </h2>
         </div>
 
