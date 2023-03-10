@@ -12,19 +12,19 @@ export default function Footer() {
             href='http://instagram.com/bruhbigchop'
             className='hover:text-darken-white'
           >
-            <i class='fab fa-instagram'></i>
+            <i className='fab fa-instagram'></i>
           </a>
           <a
             href='http://twitter.com/malcolmsmallsdev'
             className='hover:text-darken-white'
           >
-            <i class='fa-brands fa-twitter'></i>
+            <i className='fa-brands fa-twitter'></i>
           </a>
           <a
             href='http://youtube.com/bruhbigchop'
             className='hover:text-darken-white'
           >
-            <i class='fa-brands fa-youtube'></i>
+            <i className='fa-brands fa-youtube'></i>
           </a>
         </div>
       </div>

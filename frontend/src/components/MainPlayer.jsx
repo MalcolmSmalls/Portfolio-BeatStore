@@ -1,10 +1,27 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import lofibeat from '../assets/lofibeat.mp3'
 
 export default function MainPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
-
+  const [duration, setDuration] = useState(0)
   const audioPlayer = useRef()
+
+  //   useEffect(() => {
+  //     setDuration(audioPlayer.current.duration)
+  //   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+
+  function onLoadedMetadata() {
+    const seconds = Math.floor(audioPlayer.current?.duration)
+    setDuration(audioPlayer.current?.duration)
+  }
+
+  function calculateTime(secs) {
+    const minutes = Math.floor(secs / 60)
+    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+    const seconds = Math.floor(secs % 60)
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
+    return `${returnedMinutes} : ${returnedSeconds}`
+  }
 
   function togglePlayPause() {
     const prevValue = isPlaying
@@ -18,7 +35,11 @@ export default function MainPlayer() {
   }
   return (
     <div className='h-[16vh] bg-main-dark flex justify-center text-white gap-5 items-center'>
-      <audio ref={audioPlayer} src={lofibeat}>
+      <audio
+        onLoadedMetadata={onLoadedMetadata}
+        ref={audioPlayer}
+        src={lofibeat}
+      >
         {' '}
       </audio>
       <button>
@@ -50,7 +71,7 @@ export default function MainPlayer() {
       </div>
 
       {/* duration */}
-      <div>2:49</div>
+      <div>{calculateTime(duration)}</div>
     </div>
   )
 }
