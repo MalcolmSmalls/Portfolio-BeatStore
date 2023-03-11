@@ -1,9 +1,9 @@
 .progressBar {
   --bar-bg: #f3c848;
-  --seek-before-width: 100px;
+  --seek-before-width: 0;
   --seek-before-color: #f3c848;
-  --knobby: #ffffff;
-  --selectedKnobby: #f3c848;
+  --knob: #ffffff;
+  --selectedKnob: #f3c848;
 
   appearance: none;
   position: relative;
@@ -14,12 +14,6 @@
 }
 
 .progressBar::before {
-  --bar-bg: #f3c848;
-  --seek-before-width: 100px;
-  --seek-before-color: #f3c848;
-  --knobby: #ffffff;
-  --selectedKnobby: #f3c848;
-
   content: '';
   height: 11px;
   width: var(--seek-before-width);
@@ -38,10 +32,16 @@
   height: 20px;
   width: 15px;
   border: none;
-  background-color: var(--knobby);
+  background-color: var(--knob);
   cursor: pointer;
   position: relative;
   margin: -2px 0 0 0;
   z-index: 3;
   box-sizing: border-box;
+}
+
+/* knob while dragging */
+
+.progressBar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
 }

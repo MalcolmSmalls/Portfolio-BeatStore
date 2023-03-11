@@ -6,8 +6,11 @@ export default function MainPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+
+  // animation ref
   const audioPlayer = useRef()
   const progressBar = useRef() // reference to progessbar
+  const animationRef = useRef() // reference animation to update playhead each second
 
   //   useEffect(() => {
   //     setDuration(audioPlayer.current.duration)
@@ -21,11 +24,14 @@ export default function MainPlayer() {
 
   function changeRange() {
     audioPlayer.current.currentTime = progressBar.current.value
-    progressBar.current.style.setProperty(
-      '--seek-before-width',
-      `${(progressBar.current.value / duration) * 100}%`
-    )
-    setCurrentTime(progressBar.current.value)
+    changePlayerCurrentTime()
+
+    //abstract this
+    // progressBar.current.style.setProperty(
+    //   '--seek-before-width',
+    //   `${(progressBar.current.value / duration) * 100}%`
+    // )
+    // setCurrentTime(progressBar.current.value)
   }
 
   function calculateTime(secs) {
@@ -42,9 +48,31 @@ export default function MainPlayer() {
     console.log(isPlaying)
     if (!prevValue) {
       audioPlayer.current.play()
+      animationRef.current = requestAnimationFrame(whilePlaying)
     } else {
       audioPlayer.current.pause()
+      cancelAnimationFrame(animationRef.current)
     }
+  }
+
+  const whilePlaying = () => {
+    progressBar.current.value = audioPlayer.current.currentTime
+    changePlayerCurrentTime()
+    animationRef.current = requestAnimationFrame(whilePlaying)
+    // progressBar.current.style.setProperty(
+    //   '--seek-before-width',
+    //   `${(progressBar.current.value / duration) * 100}%`
+    // )
+    // setCurrentTime(progressBar.current.value)
+  }
+
+  // to refactor
+  const changePlayerCurrentTime = () => {
+    progressBar.current.style.setProperty(
+      '--seek-before-width',
+      `${(progressBar.current.value / duration) * 100}%`
+    )
+    setCurrentTime(progressBar.current.value)
   }
   return (
     <div className='h-[16vh] bg-main-dark flex justify-center text-white gap-5 items-center'>
