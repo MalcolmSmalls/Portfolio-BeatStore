@@ -74,6 +74,17 @@ export default function MainPlayer() {
     )
     setCurrentTime(progressBar.current.value)
   }
+
+  const backThirty = () => {
+    progressBar.current.value = Number(progressBar.current.value) - 30
+    changeRange()
+  }
+
+  const forwardThirty = () => {
+    progressBar.current.value = Number(progressBar.current.value) + 30
+    changeRange()
+  }
+
   return (
     <div className='h-[16vh] bg-main-dark flex justify-center text-white gap-5 items-center'>
       <audio
@@ -84,7 +95,10 @@ export default function MainPlayer() {
         {' '}
       </audio>
       <button>
-        <i className='fa-solid fa-backward-fast text-lg'></i>
+        <i
+          className='fa-solid fa-backward-fast text-lg'
+          onClick={backThirty}
+        ></i>
       </button>
 
       <div className=' border-4 rounded-full h-16 w-16 flex justify-center items-center'>
@@ -97,7 +111,10 @@ export default function MainPlayer() {
         </button>
       </div>
       <button>
-        <i className='fa-solid fa-forward-fast text-lg'></i>
+        <i
+          className='fa-solid fa-forward-fast text-lg'
+          onClick={forwardThirty}
+        ></i>
       </button>
 
       {/* current time */}
