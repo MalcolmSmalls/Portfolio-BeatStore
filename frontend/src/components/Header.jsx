@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Hero } from './'
+import { Hero, Navbar } from './'
 import { pic1, pic2 } from '../assets'
 
 function Header() {
@@ -20,6 +20,7 @@ function Header() {
   return (
     <div className='App'>
       <div>
+        <Navbar />
         <Hero autoSlide={true} slideArr={slides}>
           {slides.map((s) => (
             <>
