@@ -31,7 +31,7 @@ function Header() {
                   width: '100%',
                   height: '84vh',
                   backgroundSize: 'cover',
-                  backgroundPosition: '60% 20%',
+                  backgroundPosition: '0% 40%',
                 }}
               ></div>
             </>
