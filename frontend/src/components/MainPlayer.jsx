@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styles from '../styles/AudioPlayer.module.css'
-import lofibeat from '../assets/lofibeat.mp3'
+import apple from '../assets/apple.mp3'
 
 export default function MainPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -87,11 +87,7 @@ export default function MainPlayer() {
 
   return (
     <div className='h-[16vh] bg-main-dark flex justify-center text-white gap-5 items-center'>
-      <audio
-        onLoadedMetadata={onLoadedMetadata}
-        ref={audioPlayer}
-        src={lofibeat}
-      >
+      <audio onLoadedMetadata={onLoadedMetadata} ref={audioPlayer} src={apple}>
         {' '}
       </audio>
       <button>

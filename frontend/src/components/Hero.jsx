@@ -30,7 +30,7 @@ export default function Hero({
         >
           {slides}
         </div>
-        <div className='absolute flex flex-col justify-center items-center w-full h-full top-1'>
+        <div className='absolute flex flex-col justify-center items-center w-full h-full top-1 '>
           {slideArr[curr].title ? (
             <h1
               key={slideArr[curr].title}

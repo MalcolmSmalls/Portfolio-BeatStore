@@ -7,7 +7,7 @@ module.exports = {
       fontFamily: {
         Poppins: ['Poppins', 'Arial', 'sans-serif'],
         PressStart: ['"Press Start 2P"', 'Arial'],
-        Rubik: ['"Rubik 80s Fade"', 'Arial'],
+        Staatliches: ['"Staatliches"', 'Arial'],
       },
       colors: {
         'main-dark': '#131416',
