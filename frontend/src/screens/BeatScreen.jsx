@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import beats from '../beats'
 import { Link, useParams } from 'react-router-dom'
+import { Waveform } from '../components'
 
 export default function BeatScreen() {
   const { id } = useParams()
   const beat = beats.find((b) => b._id === id)
+
   return (
     <>
       {/* <div className='flex flex-col items-center'>{beat.name}</div> */}
@@ -16,7 +18,8 @@ export default function BeatScreen() {
           Produced by Malcolm Smalls
         </p>
       </section>
-      <div className='flex justify-center font-Poppins text-sm w-full  mt-16 gap-20'>
+
+      <div className='flex justify-center font-Poppins text-sm w-full  mt-10  gap-20'>
         <div className='flex flex-col w-1/3 items-end'>
           <img
             className='object-cover h-96 w-96'
@@ -43,11 +46,14 @@ export default function BeatScreen() {
           </section>
         </div>
       </div>
-
+      {/* 
       <span className='uppercase text-lg'>Back</span>
       <Link className='flex flex-col items-center font-Poppins' to='/'>
         <i className='fa-sharp fa-solid fa-backward-step text-2xl'></i>
-      </Link>
+      </Link> */}
+      <div>
+        <Waveform url={beat.file} />
+      </div>
     </>
   )
 }
