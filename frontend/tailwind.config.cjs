@@ -14,6 +14,7 @@ module.exports = {
         'lighter-dark': '#1d1e22',
         'darken-white': '#f2f2f2',
         golden: 'rgba(243,200,72,255)',
+        'light-gray': 'rgb(91, 91, 106)',
       },
       keyframes: {
         'fade-in-down': {
