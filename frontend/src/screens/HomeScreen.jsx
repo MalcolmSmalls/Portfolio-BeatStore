@@ -1,6 +1,6 @@
 import React from 'react'
 import beats from '../beats'
-import Beat from '../components'
+import { Beat } from '../components'
 
 export default function HomeScreen() {
   return (

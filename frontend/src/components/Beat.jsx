@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Beat({ beat }) {
   return (
     <div className='flex items-center justify-end gap-5 '>
       <li className='mb-[-30px]'>
-        {beat.name}
+        <Link to={`/beat/${beat._id}`}>{beat.name}</Link>
         <span className='text-golden'>.</span>
       </li>
       <div className='flex items-center justify-center border-8 rounded-full h-20 w-20 mt-5'>
