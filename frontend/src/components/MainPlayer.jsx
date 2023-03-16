@@ -45,7 +45,6 @@ export default function MainPlayer() {
   function togglePlayPause() {
     const prevValue = isPlaying
     setIsPlaying(!prevValue)
-    console.log(isPlaying)
     if (!prevValue) {
       audioPlayer.current.play()
       animationRef.current = requestAnimationFrame(whilePlaying)

@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Wavesurfer from 'wavesurfer.js'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-export default function Waveform({ url }) {
+export default function Waveform({ url, beatId }) {
   const waveform = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [hoverElement, setHoverElement] = useState(null)
+  const [beatID, setBeatID] = useState(Number(beatId))
+  const location = useLocation()
+
   useEffect(() => {
     if (!waveform.current) {
       waveform.current = Wavesurfer.create({
@@ -17,9 +21,10 @@ export default function Waveform({ url }) {
         barGap: 2,
         cursorWidth: 2,
       })
-      waveform.current.load(url)
     }
-  }, [])
+    waveform.current.load(url)
+    setIsPlaying(false)
+  }, [location])
 
   const playAudio = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying)
@@ -31,7 +36,6 @@ export default function Waveform({ url }) {
   }
 
   const changeHoverTextDisplay = (element) => {
-    console.log(element)
     if (element === hoverElement && element !== null) {
       return 'block text-center'
     } else {
@@ -39,6 +43,19 @@ export default function Waveform({ url }) {
     }
   }
 
+  const navigate = useNavigate()
+  const prevBeat = () => {
+    // if (beatID === 1) {
+    //   navigate(`/beat/1`)
+    // } else {
+    //   navigate(`/beat/${beatID - 1}`)
+    // }
+    navigate(`/beat/${Number(beatId) - 1}`)
+  }
+
+  const nextBeat = () => {
+    navigate(`/beat/${Number(beatId) + 1}`)
+  }
   return (
     <div className='w-screen flex flex-col items-center justify-center mt-10 text-sm'>
       <div id='waveform' className='w-1/2'></div>
@@ -46,7 +63,7 @@ export default function Waveform({ url }) {
         <div className='flex flex-col items-center justify-center'>
           <button
             id='goBack'
-            onClick={playAudio}
+            onClick={prevBeat}
             onMouseEnter={(e) => setHoverElement(e.target.id)}
             onMouseLeave={() => setHoverElement(null)}
             className='border-golden border-4 rounded-full h-10 w-10 text-golden hover:border-lighter-dark hover:text-lighter-dark'
@@ -110,7 +127,7 @@ export default function Waveform({ url }) {
 
         <div className='flex flex-col items-center'>
           <button
-            onClick={playAudio}
+            onClick={nextBeat}
             id='toNextTrack'
             className='border-golden border-4 rounded-full h-10 w-10 text-golden hover:border-lighter-dark hover:text-lighter-dark'
             onMouseEnter={(e) => setHoverElement(e.target.id)}

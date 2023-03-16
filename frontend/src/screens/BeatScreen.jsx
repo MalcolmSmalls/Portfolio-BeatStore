@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import beats from '../beats'
 import { Link, useParams } from 'react-router-dom'
 import { Waveform } from '../components'
+import { Rating } from '../components'
 
 export default function BeatScreen() {
   const { id } = useParams()
@@ -39,7 +40,10 @@ export default function BeatScreen() {
             <span className='block pb-2'>{`${beat.TypeBeat[0]}, ${beat.TypeBeat[1]}, ${beat.TypeBeat[2]}`}</span>
             <span className='font-bold'>Rating</span>
             <span className='block pb-2'>
-              {beat.rating} out of {beat.numReviews} reviews.
+              <Rating
+                value={beat.rating}
+                text={`out of ${beat.numReviews} reviews`}
+              />
             </span>
             <span className='font-bold'>Price</span>
             <span className='block pb-2'>${beat.price}</span>
@@ -52,7 +56,7 @@ export default function BeatScreen() {
         <i className='fa-sharp fa-solid fa-backward-step text-2xl'></i>
       </Link> */}
       <div>
-        <Waveform url={beat.file} />
+        <Waveform url={beat.file} beatId={beat._id} />
       </div>
     </>
   )
