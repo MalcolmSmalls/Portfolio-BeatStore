@@ -15,8 +15,11 @@ export default function BeatScreen() {
         <h2 className='uppercase tracking-wide text-5xl font-bold font-PressStart text-golden mt-10'>
           {beat.name}
         </h2>
-        <p className='uppercase text-light-gray text-lg font-Poppins'>
+        <p className='uppercase text-light-gray text-lg font-Poppins flex flex-col items-center'>
           Produced by Malcolm Smalls
+          {/* <button className='uppercase block w-60 bg-lighter-dark text-white p-3 rounded-lg text-xl font-bold tracking-widest hover:bg-main-dark '>
+            Add to Cart
+          </button> */}
         </p>
       </section>
 
@@ -47,6 +50,9 @@ export default function BeatScreen() {
             </span>
             <span className='font-bold'>Price</span>
             <span className='block pb-2'>${beat.price}</span>
+            <button className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark '>
+              Add to Cart
+            </button>
           </section>
         </div>
       </div>
