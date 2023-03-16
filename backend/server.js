@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const beats = require('./data/beats.js')
+var cors = require('cors')
+
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('API is running.')
