@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import { Waveform } from '../components'
 import { Rating } from '../components'
 import axios from 'axios'
-import beats from '../beats'
 
 export default function BeatScreen() {
   const [beat, setBeat] = useState()
