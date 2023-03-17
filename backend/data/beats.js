@@ -84,4 +84,4 @@ const beats = [
   },
 ]
 
-module.exports = beats
+export default beats
