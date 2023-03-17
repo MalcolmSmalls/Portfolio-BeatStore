@@ -8,7 +8,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const fetchBeats = async () => {
-      const { data } = await axios.get('api/beats')
+      const { data } = await axios.get('/api/beats')
 
       setBeats(data) // promise
     }
