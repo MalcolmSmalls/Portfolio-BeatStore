@@ -1,8 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import beats from './data/beats.js'
+import connectDB from './config/db.js'
 
 dotenv.config()
+connectDB()
 const app = express()
 
 app.get('/', (req, res) => {
