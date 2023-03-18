@@ -38,10 +38,13 @@ const beatSchema = mongoose.Schema(
     description: {
       type: String,
     },
-    tags: {
-      type: String,
-      required: true,
-    },
+    tags: [
+      {
+        tag1: { type: String, required: true },
+        tag2: { type: String, required: true },
+        tag3: { type: String, required: true },
+      },
+    ],
     typeBeat: {
       type: String,
       required: true,
