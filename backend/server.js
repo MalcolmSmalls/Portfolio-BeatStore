@@ -1,8 +1,8 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import beats from './data/beats.js'
 import connectDB from './config/db.js'
 import colors from 'colors'
+import beatRoutes from './routes/beatRoutes.js'
 
 dotenv.config()
 connectDB()
@@ -12,14 +12,7 @@ app.get('/', (req, res) => {
   res.send('API is running.')
 })
 
-app.get('/api/beats', (req, res) => {
-  res.json(beats)
-})
-
-app.get('/api/beats/:id', (req, res) => {
-  const beat = beats.find((b) => b._id === req.params.id)
-  res.json(beat)
-})
+app.use('/api/beats', beatRoutes)
 
 const PORT = process.env.PORT || 5000
 

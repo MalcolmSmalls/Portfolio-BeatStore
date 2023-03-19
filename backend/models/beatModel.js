@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 
+// tags may need to have a different id each tag, may need to figure that out how to use them in tagSchema in the future same with typeBeat
+
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
