@@ -49,13 +49,13 @@ export default function BeatScreen() {
             <div className='flex flex-col w-1/3 text-lighter-dark text-xl'>
               <section>
                 <span className='font-bold'>BPM</span>
-                <span className='block pb-2'>{beat.BPM}</span>
+                <span className='block pb-2'>{beat.bpm}</span>
                 <span className='font-bold'>Key</span>
-                <span className='block pb-2'>{beat.Key}</span>
+                <span className='block pb-2'>{beat.key}</span>
                 <span className='font-bold'>Tags</span>
-                <span className='block pb-2'>{`${beat.Tags[0]}, ${beat.Tags[1]}, ${beat.Tags[2]}`}</span>
+                <span className='block pb-2'>{`${beat.tags[0]}, ${beat.tags[1]}, ${beat.tags[2]}`}</span>
                 <span className='font-bold'>Type Beat</span>
-                <span className='block pb-2'>{`${beat.TypeBeat[0]}, ${beat.TypeBeat[1]}, ${beat.TypeBeat[2]}`}</span>
+                <span className='block pb-2'>{`${beat.typeBeat[0]}, ${beat.typeBeat[1]}, ${beat.typeBeat[2]}`}</span>
                 <span className='font-bold'>Rating</span>
                 <span className='block pb-2'>
                   <Rating

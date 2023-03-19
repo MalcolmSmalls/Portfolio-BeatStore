@@ -9,7 +9,6 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchBeats = async () => {
       const { data } = await axios.get('/api/beats')
-
       setBeats(data) // promise
     }
 
@@ -18,11 +17,15 @@ export default function HomeScreen() {
 
   return (
     <>
-      <ul id='beats' className='container flex flex-col'>
-        {beats.map((beat) => (
-          <Beat beat={beat} />
-        ))}
-      </ul>
+      {beats.length === 0 ? (
+        <h1>Loading</h1>
+      ) : (
+        <ul id='beats' className='container flex flex-col'>
+          {beats.map((beat) => (
+            <Beat beat={beat} />
+          ))}
+        </ul>
+      )}
     </>
   )
 }

@@ -14,18 +14,18 @@ export default function Beat({ beat }) {
       <div className='flex flex-col text-xs font-Poppins items-center justify-center mt-11  w-50 uppercase  '>
         <ul>
           <li>
-            <span className='font-bold'>BPM:</span> {beat.BPM}
+            <span className='font-bold'>BPM:</span> {beat.bpm}
           </li>
           <li>
-            <span className='font-bold'>Key:</span> {beat.Key}
+            <span className='font-bold'>Key:</span> {beat.key}
           </li>
           <li>
-            <span className='font-bold'>Tags:</span> {beat.Tags[0]} -{' '}
-            {beat.Tags[1]} - {beat.Tags[2]}
+            <span className='font-bold'>Tags:</span> {beat.tags[0]} -{' '}
+            {beat.tags[1]} - {beat.tags[2]}
           </li>
           <li>
-            <span className='font-bold'>Type:</span> {beat.TypeBeat[0]} -{' '}
-            {beat.TypeBeat[1]} - {beat.TypeBeat[2]}
+            <span className='font-bold'>Type:</span> {beat.typeBeat[0]} -{' '}
+            {beat.typeBeat[1]} - {beat.typeBeat[2]}
           </li>
           <div className='w-[50vw] bg-white h-4 mt-[1px] pr-50'></div>
         </ul>
