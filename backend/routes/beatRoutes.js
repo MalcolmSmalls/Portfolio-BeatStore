@@ -25,7 +25,8 @@ router.get(
     if (beat) {
       res.json(beat)
     } else {
-      res.status(404).json({ message: 'Beat not found' })
+      res.status(404)
+      throw new Error('Beat not found')
     }
   })
 )
