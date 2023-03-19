@@ -9,6 +9,14 @@ const reviewSchema = mongoose.Schema(
   { timestamps: true }
 )
 
+const tagSchema = mongoose.Schema({
+  name: { type: String, required: true },
+})
+
+const typeBeatSchema = mongoose.Schema({
+  name: { type: String, required: true },
+})
+
 const beatSchema = mongoose.Schema(
   {
     user: {
@@ -38,17 +46,9 @@ const beatSchema = mongoose.Schema(
     description: {
       type: String,
     },
-    tags: [
-      {
-        tag1: { type: String, required: true },
-        tag2: { type: String, required: true },
-        tag3: { type: String, required: true },
-      },
-    ],
-    typeBeat: {
-      type: String,
-      required: true,
-    },
+    tags: [String],
+    typeBeat: [String],
+    reviews: [reviewSchema],
     price: {
       type: Number,
       required: true,
