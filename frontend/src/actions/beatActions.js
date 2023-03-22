@@ -5,7 +5,7 @@ import {
   BEAT_LIST_SUCCESS,
 } from '../constants/beatConstants'
 
-export const listProducts = () => async (dispatch) => {
+export const listBeats = () => async (dispatch) => {
   try {
     dispatch({ type: BEAT_LIST_REQUEST })
 

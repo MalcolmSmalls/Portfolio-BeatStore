@@ -1,24 +1,25 @@
-import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { listBeats } from '../actions/beatActions'
 import { Beat } from '../components'
 
 export default function HomeScreen() {
-  const [beats, setBeats] = useState([])
+  const dispatch = useDispatch()
+
+  const beatList = useSelector((state) => state.beatList)
+
+  const { loading, error, beats } = beatList
 
   useEffect(() => {
-    const fetchBeats = async () => {
-      const { data } = await axios.get('/api/beats')
-      setBeats(data) // promise
-    }
-
-    fetchBeats()
-  }, [])
+    dispatch(listBeats())
+  }, [dispatch])
 
   return (
     <>
-      {beats.length === 0 ? (
+      {loading ? (
         <h1>Loading</h1>
+      ) : error ? (
+        <h1>{error}</h1>
       ) : (
         <ul id='beats' className='container flex flex-col'>
           {beats.map((beat) => (
