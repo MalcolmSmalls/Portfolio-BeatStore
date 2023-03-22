@@ -54,7 +54,7 @@ export default function Waveform({ url, beatId }) {
   }
 
   const nextBeat = () => {
-    navigate(`/beat/${Number(beatId) + 1}`)
+    navigate(`/beat/${beatId}`)
   }
   return (
     <div className='w-screen flex flex-col items-center justify-center mt-10 text-sm'>
