@@ -1,9 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { beatListReducer } from './reducers/beatReducers'
+import { beatListReducer, beatDetailsReducer } from './reducers/beatReducers'
 
-const reducer = combineReducers({ beatList: beatListReducer })
+const reducer = combineReducers({
+  beatList: beatListReducer,
+  beatDetails: beatDetailsReducer,
+})
 const initialState = {}
 
 const middleware = [thunk]
