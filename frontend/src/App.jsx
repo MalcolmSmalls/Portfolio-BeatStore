@@ -11,7 +11,7 @@ function App() {
       <Header />
       <MainPlayer />
 
-      <main className='min-h-[82vh]'>
+      <main className='min-h-[82vh]' id='beats'>
         <div className=' flex font-Staatliches justify-center flex-col items-center text-9xl mt-[20px] mb-[30px]'>
           <Routes>
             <Route path='/' element={<HomeScreen />} />
