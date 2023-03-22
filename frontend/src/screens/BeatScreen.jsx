@@ -16,7 +16,7 @@ export default function BeatScreen() {
 
   useEffect(() => {
     dispatch(listBeatDetails(id))
-  }, [dispatch])
+  }, [dispatch, id])
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}`)
