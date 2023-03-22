@@ -1,13 +1,10 @@
 import {
-  BEAT_LIST_FAIL,
-  BEAT_LIST_REQUEST,
-  BEAT_LIST_SUCCESS,
-} from '../constants/beatConstants'
-
-import {
   BEAT_DETAILS_FAIL,
   BEAT_DETAILS_REQUEST,
   BEAT_DETAILS_SUCCESS,
+  BEAT_LIST_FAIL,
+  BEAT_LIST_REQUEST,
+  BEAT_LIST_SUCCESS,
 } from '../constants/beatConstants'
 
 export const beatListReducer = (state = { beats: [] }, action) => {

@@ -11,7 +11,6 @@ import {
 export const listBeats = () => async (dispatch) => {
   try {
     dispatch({ type: BEAT_LIST_REQUEST })
-
     const { data } = await axios.get('/api/beats')
 
     dispatch({ type: BEAT_LIST_SUCCESS, payload: data })
@@ -26,12 +25,11 @@ export const listBeats = () => async (dispatch) => {
   }
 }
 
-export const listBeatDetails = () => async (dispatch) => {
+export const listBeatDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: BEAT_DETAILS_REQUEST })
 
-    const { data } = await axios.get('/api/beats')
-
+    const { data } = await axios.get(`/api/beats/${id}`)
     dispatch({ type: BEAT_DETAILS_SUCCESS, payload: data })
   } catch (error) {
     dispatch({

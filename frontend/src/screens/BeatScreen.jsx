@@ -1,40 +1,36 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { Waveform } from '../components'
 import { Rating } from '../components'
-import axios from 'axios'
+import { listBeatDetails, listBeats } from '../actions/beatActions'
 
 export default function BeatScreen() {
-  const [beat, setBeat] = useState()
   const { id } = useParams()
+  const dispatch = useDispatch()
   // const beat = beats.find((b) => b._id === id)
 
-  useEffect(() => {
-    const fetchBeat = async () => {
-      const { data } = await axios.get(`/api/beats/${id}`)
-      console.log(data.name)
-      setBeat(data)
-    }
+  const beatDetails = useSelector((state) => state.beatDetails)
+  const { loading, error, beat } = beatDetails
 
-    fetchBeat()
-  }, [])
+  useEffect(() => {
+    dispatch(listBeatDetails(id))
+  }, [dispatch])
 
   return (
     <>
-      {!beat ? (
+      {loading || loading === undefined ? (
         <h1>Loading</h1>
+      ) : error ? (
+        <h2>Error</h2>
       ) : (
         <>
-          {/* <div className='flex flex-col items-center'>{beat.name}</div> */}
           <section className='text-center'>
             <h2 className='uppercase tracking-wide text-5xl font-bold font-PressStart text-golden mt-10'>
               {beat.name}
             </h2>
             <p className='uppercase text-light-gray text-lg font-Poppins flex flex-col items-center'>
               Produced by Malcolm Smalls
-              {/* <button className='uppercase block w-60 bg-lighter-dark text-white p-3 rounded-lg text-xl font-bold tracking-widest hover:bg-main-dark '>
-        Add to Cart
-      </button> */}
             </p>
           </section>
 
@@ -71,11 +67,6 @@ export default function BeatScreen() {
               </section>
             </div>
           </div>
-          {/* 
-  <span className='uppercase text-lg'>Back</span>
-  <Link className='flex flex-col items-center font-Poppins' to='/'>
-    <i className='fa-sharp fa-solid fa-backward-step text-2xl'></i>
-  </Link> */}
           <div>
             <Waveform url={beat.file} beatId={beat._id} />
           </div>
