@@ -3,6 +3,7 @@ import { Footer, Header, MainPlayer } from './components'
 import HomeScreen from './screens/HomeScreen'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import BeatScreen from './screens/BeatScreen'
+import CartScreen from './screens/CartScreen'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomeScreen />} />
             <Route path='/beat/:id' element={<BeatScreen />} />
+            <Route path='/cart/:id?' element={<CartScreen />} />
           </Routes>
         </div>
       </main>

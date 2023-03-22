@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Waveform } from '../components'
 import { Rating } from '../components'
 import { listBeatDetails, listBeats } from '../actions/beatActions'
 
 export default function BeatScreen() {
+  const navigate = useNavigate()
   const { id } = useParams()
   const dispatch = useDispatch()
   // const beat = beats.find((b) => b._id === id)
@@ -17,12 +18,16 @@ export default function BeatScreen() {
     dispatch(listBeatDetails(id))
   }, [dispatch])
 
+  const addToCartHandler = () => {
+    navigate(`/cart/${id}`)
+  }
+
   return (
     <>
       {loading || loading === undefined ? (
         <h1>Loading</h1>
       ) : error ? (
-        <h2>Error</h2>
+        <h2>{error}</h2>
       ) : (
         <>
           <section className='text-center'>
@@ -61,7 +66,10 @@ export default function BeatScreen() {
                 </span>
                 <span className='font-bold'>Price</span>
                 <span className='block pb-2'>${beat.price}</span>
-                <button className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark '>
+                <button
+                  className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark '
+                  onClick={addToCartHandler}
+                >
                   Add to Cart
                 </button>
               </section>

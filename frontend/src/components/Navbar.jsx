@@ -12,7 +12,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to='#beats' className='hover:text-main-dark'>
+            <Link to='/#beats' className='hover:text-main-dark'>
               Beats
             </Link>
           </li>
@@ -29,6 +29,11 @@ export default function Navbar() {
           <li>
             <Link to='#' className='hover:text-main-dark'>
               Log-In
+            </Link>
+          </li>
+          <li>
+            <Link to='/cart' className='hover:text-main-dark'>
+              Cart
             </Link>
           </li>
         </ul>
