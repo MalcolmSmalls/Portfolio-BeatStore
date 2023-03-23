@@ -23,6 +23,10 @@ export default function CartScreen() {
   const removeFromCartHandler = (id) => {
     console.log('remove')
   }
+
+  const checkoutHandler = () => {
+    navigate('/login?redirect=shipping')
+  }
   return (
     <div>
       {cartItems.length === 0 ? (
@@ -81,7 +85,7 @@ export default function CartScreen() {
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center text-2xl font-bold'>
+                <li className='border-2 h-20 flex items-center justify-center text-2xl font-bold'>
                   <button
                     type='button'
                     onClick={() => removeFromCartHandler(item.beat)}
@@ -96,6 +100,24 @@ export default function CartScreen() {
           <div className='right-col border-2 w-[30%]'>
             <div className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
               <h2>Subtotal ({cartItems.length}) items</h2>
+            </div>
+            <div className='flex p-5'>
+              <p className='w-[50%] font-bold text-golden'>Total</p>
+              <p className='w-[50%] font-bold text-golden flex justify-end'>
+                $
+                {cartItems
+                  .reduce((acc, item) => acc + item.price, 0)
+                  .toFixed(2)}
+              </p>
+            </div>
+            <div className='w-full flex justify-center'>
+              <button
+                className='w-[80%]  uppercase  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark'
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+              >
+                Proceed To Checkout
+              </button>
             </div>
           </div>
         </div>
