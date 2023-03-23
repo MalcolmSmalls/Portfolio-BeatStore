@@ -27,7 +27,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to='#' className='hover:text-main-dark'>
+            <Link to='/login' className='hover:text-main-dark'>
               Log-In
             </Link>
           </li>

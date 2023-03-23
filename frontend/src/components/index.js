@@ -6,5 +6,16 @@ import Navbar from './Navbar'
 import Beat from './Beat'
 import Waveform from './Waveform'
 import Rating from './Rating'
+import FormContainer from './FormContainer'
 
-export { Footer, Header, Hero, MainPlayer, Navbar, Beat, Waveform, Rating }
+export {
+  Footer,
+  Header,
+  Hero,
+  MainPlayer,
+  Navbar,
+  Beat,
+  Waveform,
+  Rating,
+  FormContainer,
+}
