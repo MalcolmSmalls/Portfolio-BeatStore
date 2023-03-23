@@ -19,46 +19,85 @@ export default function CartScreen() {
       dispatch(addToCart(id))
     }
   }, [dispatch, id])
+
+  const removeFromCartHandler = (id) => {
+    console.log('remove')
+  }
   return (
     <div>
       {cartItems.length === 0 ? (
-        <div className='flex flex-col justify-center items-center w-screen h-[82vh] gap-5 '>
+        <div className='flex flex-col justify-center items-center w-screen h-[82vh] gap-5 font-Poppins '>
           <p className='text-6xl'>Your cart is empty</p>
           <button className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-2xl tracking-widest hover:bg-main-dark '>
             <Link to='/'>Go Back</Link>
           </button>
         </div>
       ) : (
-        <div className='border-8 w-[90vw] h-[82vh] flex pt-10 text-xl '>
-          <div className='left border-2 w-[10%]'>
-            <ul>
+        <div className='border-8 w-[90vw] h-[82vh] flex pt-10 text-xl font-Poppins '>
+          <div className='left border-2 w-[10%] flex justify-center '>
+            <ul className='mt-10'>
               {cartItems.map((item) => (
-                <li>
-                  <img
-                    src={item.image}
-                    className='mt-10 object-cover rounded w-20 h-20'
-                  />
-                </li>
+                <>
+                  <li className='border-2 h-20 flex items-center'>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className='object-cover rounded w-16 h-16'
+                    />
+                  </li>
+                </>
               ))}
             </ul>
           </div>
           <div className='mid border-2 w-[30%]'>
-            <h2 className='border-2 h-10'>Item</h2>
+            <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+              Item
+            </h2>
             <ul>
               {cartItems.map((item) => (
-                <li>{item.name}</li>
+                <li className='border-2 h-20 flex items-center text-sm font-bold'>
+                  <Link to={`/beat/${item.beat}`}>
+                    {item.name} (Produced by Malcolm Smalls)
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
-          <div className='right border-2 w-[30%]'>
-            <h2>Price</h2>
+          <div className='right border-2 w-[20%]'>
+            <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+              Price
+            </h2>
             <ul>
               {cartItems.map((item) => (
-                <li>{item.price}</li>
+                <li className='border-2 h-20 flex items-center text-2xl font-bold'>
+                  ${item.price}
+                </li>
               ))}
             </ul>
           </div>
-          <div className='right-col border-2 w-[30%]'></div>
+          <div className='right border-2 w-[10%]'>
+            <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+              Remove
+            </h2>
+            <ul>
+              {cartItems.map((item) => (
+                <li className='border-2 h-20 flex items-center text-2xl font-bold'>
+                  <button
+                    type='button'
+                    onClick={() => removeFromCartHandler(item.beat)}
+                  >
+                    {' '}
+                    <i className='fa-solid fa-trash'></i>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='right-col border-2 w-[30%]'>
+            <div className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+              <h2>Subtotal ({cartItems.length}) items</h2>
+            </div>
+          </div>
         </div>
       )}
     </div>
