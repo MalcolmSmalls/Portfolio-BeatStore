@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
 export default function ProfileScreen() {
   const [email, setEmail] = useState('')
@@ -16,6 +16,10 @@ export default function ProfileScreen() {
   const { loading, error, user } = userDetails
 
   const userLogin = useSelector((state) => state.userLogin)
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+
+  const { success } = userUpdateProfile
   const { userInfo } = userLogin
 
   useEffect(() => {
@@ -35,7 +39,7 @@ export default function ProfileScreen() {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      // DISPATCH UPDATE PROFILE
+      dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
   }
   return (
@@ -43,6 +47,9 @@ export default function ProfileScreen() {
       <div className='left w-[50%] text-lg flex flex-col items-center'>
         <h3 className='text-5xl p-10 text-golden'>My Profile</h3>
         {error && <h2 className='text-red-500'>{error}</h2>}
+        {success && (
+          <h2 className='text-green-500'>Profile Successfully Updated</h2>
+        )}
         {message && <h2 className='text-red-500'>{message}</h2>}
         {loading && <h2>Loading...</h2>}
         <div className='flex items-center w-[70%]'>
