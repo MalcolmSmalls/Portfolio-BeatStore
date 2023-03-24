@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import PaymentScreen from './screens/PaymentScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <main className='min-h-[82vh]' id='beats'>
         <div className=' flex font-Staatliches justify-center flex-col items-center text-9xl mt-[20px] mb-[30px]'>
           <Routes>
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
