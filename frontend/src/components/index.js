@@ -7,6 +7,7 @@ import Beat from './Beat'
 import Waveform from './Waveform'
 import Rating from './Rating'
 import FormContainer from './FormContainer'
+import CheckoutSteps from './CheckoutSteps'
 
 export {
   Footer,
@@ -18,4 +19,5 @@ export {
   Waveform,
   Rating,
   FormContainer,
+  CheckoutSteps,
 }
