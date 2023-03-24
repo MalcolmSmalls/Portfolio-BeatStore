@@ -6,6 +6,7 @@ import BeatScreen from './screens/BeatScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import ProfileScreen from './screens/ProfileScreen'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <main className='min-h-[82vh]' id='beats'>
         <div className=' flex font-Staatliches justify-center flex-col items-center text-9xl mt-[20px] mb-[30px]'>
           <Routes>
+            <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/' element={<HomeScreen />} />
