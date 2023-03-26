@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { CheckoutSteps } from '../components'
 import { Link } from 'react-router-dom'
+import { createOrder } from '../actions/orderActions'
 
 export default function PlaceOrderScreen() {
   const cart = useSelector((state) => state.cart)
@@ -10,12 +11,30 @@ export default function PlaceOrderScreen() {
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
+
+  const navigate = useNavigate()
+  const orderCreate = useSelector((state) => state.orderCreate)
+
+  const { order, success, error } = orderCreate
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`)
+    }
+  }, [navigate, success])
+
   cart.totalPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price, 0)
   )
   const dispatch = useDispatch()
   const placeOrderHandler = () => {
-    console.log('placed')
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        paymentMethod: cart.paymentMethod,
+        totalPrice: cart.totalPrice,
+      })
+    )
   }
   return (
     <div className='text-sm w-screen flex flex-col items-center'>
@@ -67,6 +86,8 @@ export default function PlaceOrderScreen() {
 
               <p className='text-2xl'>${cart.totalPrice}</p>
             </div>
+
+            {error && <p className='text-red-500 pt-5  text-center'>{error}</p>}
 
             <button
               type='submit'

@@ -12,7 +12,7 @@ const orderSchema = mongoose.Schema(
         name: { type: String, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        product: {
+        beat: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           ref: 'Beat',
@@ -31,10 +31,10 @@ const orderSchema = mongoose.Schema(
     },
     taxPrice: {
       type: Number,
-      required: true,
+      required: false,
       default: 0.0,
     },
-    taxPrice: {
+    totalPrice: {
       type: Number,
       required: true,
       default: 0.0,
@@ -46,15 +46,6 @@ const orderSchema = mongoose.Schema(
     },
     paidAt: {
       type: Date,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
     },
   },
   {
