@@ -17,7 +17,7 @@ export default function OrderScreen() {
     if (!order || order._id !== orderId) {
       dispatch(getOrderDetails(orderId))
     }
-  }, [order, orderId])
+  }, [order, dispatch, orderId])
 
   return loading ? (
     <h2>Loading</h2>
