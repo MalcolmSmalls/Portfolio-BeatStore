@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { PayPalButton } from 'react-paypal-button-v2'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { getOrderDetails, payOrder } from '../actions/orderActions'
-import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET } from '../constants/orderConstants'
 
 export default function OrderScreen() {
@@ -12,16 +12,15 @@ export default function OrderScreen() {
   const { id } = useParams()
   const [sdkReady, setSdkReady] = useState(false)
   const orderId = id
+  const dispatch = useDispatch()
   const orderDetails = useSelector((state) => state.orderDetails)
 
   const orderPay = useSelector((state) => state.orderPay)
   const { loading: loadingPay, success: successPay } = orderPay
 
   const { order, loading, error } = orderDetails
-  const dispatch = useDispatch()
 
   if (!loading) {
-    //   Calculate prices
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2)
     }
@@ -111,7 +110,7 @@ export default function OrderScreen() {
                         </p>
                       </div>
                       <div>
-                        <div className='ml-60'>
+                        <div className='pl-60'>
                           <span>${item.price}</span>
                         </div>
                       </div>
