@@ -49,7 +49,7 @@ export default function ProfileScreen() {
   }
   return (
     <div className='w-screen flex'>
-      <div className='left w-[50%] text-lg flex flex-col items-center'>
+      <div className='left w-[45%] text-lg flex flex-col items-center'>
         <h3 className='text-5xl p-10 text-golden'>My Profile</h3>
         {error && <h2 className='text-red-500'>{error}</h2>}
         {success && (
@@ -57,7 +57,7 @@ export default function ProfileScreen() {
         )}
         {message && <h2 className='text-red-500'>{message}</h2>}
         {loading && <h2>Loading...</h2>}
-        <div className='flex items-center w-[70%]'>
+        <div className='flex items-center w-[60%]'>
           <form
             onSubmit={submitHandler}
             className='flex items-start flex-col w-[100%] font-Poppins'
@@ -74,7 +74,7 @@ export default function ProfileScreen() {
               onChange={(e) => setName(e.target.value)}
               placeholder='Enter your name'
               id='name'
-              className='border-2 rounded p-1 w-full mb-5'
+              className='border-2 rounded p-1 pl-2 w-full mb-5'
             />
             <label htmlFor='email' className='text-sm uppercase font-bold'>
               E-Mail Address
@@ -85,7 +85,7 @@ export default function ProfileScreen() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Enter your email'
               id='email'
-              className='border-2 rounded p-1 w-full mb-5'
+              className='border-2 rounded p-1 w-full mb-5 pl-2 '
             />
             <label htmlFor='password' className='text-sm uppercase font-bold'>
               Password
@@ -96,7 +96,7 @@ export default function ProfileScreen() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Enter your password'
               id='password'
-              className='border-2 rounded p-1 w-full'
+              className='border-2 rounded p-1 w-full pl-2 '
             />
 
             <label
@@ -111,7 +111,7 @@ export default function ProfileScreen() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder='Confirm your password'
               id='confirmPassword'
-              className='border-2 rounded p-1 w-full'
+              className='border-2 rounded p-1 w-full pl-2 '
             />
             <button
               type='submit'
@@ -123,14 +123,16 @@ export default function ProfileScreen() {
         </div>
       </div>
       <div className='right border-2 w-[50%] text-lg'>
-        <h3 className='text-5xl p-10 text-golden'>My Orders</h3>
+        <h3 className='text-5xl pb-10 pt-10 text-center text-golden'>
+          My Orders
+        </h3>
         {loadingOrders ? (
           <h2>Loading</h2>
         ) : errorOrders ? (
           <p>{errorOrders}</p>
         ) : (
-          <table>
-            <thead>
+          <table className='border-2 w-full font-Poppins text-center text-sm'>
+            <thead className='border-2'>
               <tr>
                 <th>ID</th>
                 <th>DATE</th>
@@ -141,11 +143,13 @@ export default function ProfileScreen() {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
-                  <td>
+                <tr className='border-2' key={order._id}>
+                  <td className='border-2'>{order._id}</td>
+                  <td className='border-2'>
+                    {order.createdAt.substring(0, 10)}
+                  </td>
+                  <td className='border-2'>{order.totalPrice}</td>
+                  <td className='border-2'>
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
