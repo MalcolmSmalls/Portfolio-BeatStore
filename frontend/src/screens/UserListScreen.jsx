@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { listUsers } from '../actions/userActions'
+import { listUsers, deleteUser } from '../actions/userActions'
 
 export default function UserListScreen() {
   const navigate = useNavigate()
@@ -11,16 +11,21 @@ export default function UserListScreen() {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const userDelete = useSelector((state) => state.userDelete)
+  const { success: successDelete } = userDelete
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers())
     } else {
       navigate('/login')
     }
-  }, [dispatch, userLogin])
+  }, [dispatch, userLogin, successDelete])
 
   const deleteHandler = (id) => {
-    console.log(`delete ${id}`)
+    dispatch(deleteUser(id))
+    console.log(id)
   }
   return (
     <>
