@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUser } from '../actions/userActions'
+import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 import { FormContainer } from '../components'
 
@@ -17,24 +18,38 @@ export default function UserEditScreen() {
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
+  const userUpdate = useSelector((state) => state.userUpdate)
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = userUpdate
+
   useEffect(() => {
-    if (!user.name || user._id !== id) {
-      dispatch(getUserDetails(id))
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET })
+      navigate('/admin/userlist')
     } else {
-      setName(user.name)
-      setEmail(user.email)
-      setIsAdmin(user.isAdmin)
+      if (!user.name || user._id !== id) {
+        dispatch(getUserDetails(id))
+      } else {
+        setName(user.name)
+        setEmail(user.email)
+        setIsAdmin(user.isAdmin)
+      }
     }
-  }, [user, dispatch, id])
+  }, [user, dispatch, id, successUpdate])
   const submitHandler = (e) => {
     e.preventDefault()
+    dispatch(updateUser({ _id: id, name, email, isAdmin }))
   }
   return (
     <>
       <Link to='/admin/userlist'>Go Back</Link>
       <FormContainer>
         <h1 className='text-9xl mt-10 text-golden'>Edit User</h1>
-
+        {loadingUpdate && <h2>Loading...</h2>}
+        {errorUpdate && <h2>{errorUpdate}</h2>}
         {loading ? (
           <h2>Loading...</h2>
         ) : error ? (
