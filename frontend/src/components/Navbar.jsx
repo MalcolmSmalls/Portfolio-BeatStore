@@ -65,6 +65,25 @@ export default function Navbar() {
               Cart
             </Link>
           </li>
+          {userInfo && userInfo.isAdmin && (
+            <>
+              <li>
+                <Link to='/admin/userlist' className='hover:text-main-dark'>
+                  Users
+                </Link>
+              </li>
+              <li>
+                <Link to='/admin/productlist' className='hover:text-main-dark'>
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to='/admin/orderlist' className='hover:text-main-dark'>
+                  Orders
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>
