@@ -1,4 +1,7 @@
 import {
+  BEAT_DELETE_FAIL,
+  BEAT_DELETE_REQUEST,
+  BEAT_DELETE_SUCCESS,
   BEAT_DETAILS_FAIL,
   BEAT_DETAILS_REQUEST,
   BEAT_DETAILS_SUCCESS,
@@ -30,6 +33,22 @@ export const beatDetailsReducer = (
     case BEAT_DETAILS_SUCCESS:
       return { loading: false, beat: action.payload }
     case BEAT_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const beatDeleteReducer = (
+  state = { beat: { reviews: [] } },
+  action
+) => {
+  switch (action.type) {
+    case BEAT_DELETE_REQUEST:
+      return { loading: true }
+    case BEAT_DELETE_SUCCESS:
+      return { loading: false, success: true }
+    case BEAT_DELETE_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

@@ -1,7 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { beatListReducer, beatDetailsReducer } from './reducers/beatReducers'
+import {
+  beatListReducer,
+  beatDetailsReducer,
+  beatDeleteReducer,
+} from './reducers/beatReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
   userLoginReducer,
@@ -23,6 +27,7 @@ import {
 const reducer = combineReducers({
   beatList: beatListReducer,
   beatDetails: beatDetailsReducer,
+  beatDelete: beatDeleteReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

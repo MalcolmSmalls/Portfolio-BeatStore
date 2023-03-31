@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { listBeats } from '../actions/beatActions'
+import { listBeats, deleteBeat } from '../actions/beatActions'
 
 export default function BeatListScreen() {
   const navigate = useNavigate()
@@ -12,13 +12,20 @@ export default function BeatListScreen() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const beatDelete = useSelector((state) => state.beatDelete)
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = beatDelete
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listBeats())
     } else {
       navigate('/login')
     }
-  }, [dispatch, userLogin])
+  }, [dispatch, userLogin, successDelete])
 
   const addBeatHandler = () => {
     console.log('hi')
@@ -26,7 +33,7 @@ export default function BeatListScreen() {
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
-      // delete beats
+      dispatch(deleteBeat(id))
     }
   }
   return (
@@ -38,6 +45,8 @@ export default function BeatListScreen() {
       >
         <i className='fas fa-plus text-sm'></i> Add Beat
       </button>
+      {loadingDelete && <h2>Loading...</h2>}
+      {errorDelete && <h2>{errorDelete}</h2>}
       {loading ? (
         <h2>Loading</h2>
       ) : error ? (

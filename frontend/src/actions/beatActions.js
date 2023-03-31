@@ -1,5 +1,8 @@
 import axios from 'axios'
 import {
+  BEAT_DELETE_FAIL,
+  BEAT_DELETE_REQUEST,
+  BEAT_DELETE_SUCCESS,
   BEAT_DETAILS_FAIL,
   BEAT_DETAILS_REQUEST,
   BEAT_DETAILS_SUCCESS,
@@ -34,6 +37,37 @@ export const listBeatDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: BEAT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const deleteBeat = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BEAT_DELETE_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    await axios.delete(`/api/beats/:id`, config)
+
+    dispatch({
+      type: BEAT_DELETE_SUCCESS,
+    })
+  } catch (error) {
+    dispatch({
+      type: BEAT_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
