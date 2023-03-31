@@ -26,11 +26,7 @@ export default function Navbar() {
               Beats
             </Link>
           </li>
-          <li>
-            <Link to='#' className='hover:text-main-dark'>
-              Soundkits
-            </Link>
-          </li>
+
           <li>
             <Link to='#' className='hover:text-main-dark'>
               Contact
@@ -73,8 +69,8 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link to='/admin/productlist' className='hover:text-main-dark'>
-                  Products
+                <Link to='/admin/beatlist' className='hover:text-main-dark'>
+                  Beats
                 </Link>
               </li>
               <li>
