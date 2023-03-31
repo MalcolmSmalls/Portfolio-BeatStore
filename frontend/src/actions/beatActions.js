@@ -60,7 +60,7 @@ export const deleteBeat = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    await axios.delete(`/api/beats/:id`, config)
+    await axios.delete(`/api/beats/${id}`, config)
 
     dispatch({
       type: BEAT_DELETE_SUCCESS,

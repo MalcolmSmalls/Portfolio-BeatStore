@@ -39,4 +39,53 @@ const deleteBeat = asyncHandler(async (req, res) => {
   }
 })
 
-export { getBeats, getBeatById, deleteBeat }
+// @desc Create a beat
+// @route POST /api/beats/
+// @access Private/Admin
+const addBeat = asyncHandler(async (req, res) => {
+  const beat = new Beat({
+    name: 'Sample name',
+    price: 0,
+    user: req.user._id,
+    file: 'samplefile',
+    image: 'samplepic',
+    bpm: 120,
+    key: 'Sample Key',
+    description: '',
+    tags: ['SampleTag1', 'SampleTag2', 'SampleTag3'],
+    typeBeat: ['SampleType1', 'SampleType2', 'SampleType3'],
+    numReviews: 0,
+  })
+
+  const createdBeat = await beat.save()
+  res.status(201).json(createdBeat)
+})
+
+// @desc Update a beat
+// @route PUT /api/beats/:id
+// @access Private/Admin
+const updateBeat = asyncHandler(async (req, res) => {
+  const { name, price, tags, file, image, bpm, key, description, typeBeat } =
+    req.body
+
+  const beat = await Beat.findById(req.params.id)
+
+  if (beat) {
+    beat.name = name
+    beat.price = price
+    beat.tags = tags
+    beat.file = file
+    beat.image = image
+    beat.bpm = bpm
+    beat.key = key
+    beat.description = description
+    beat.typeBeat = typeBeat
+    const updatedBeat = await beat.save()
+    res.json(updatedBeat)
+  } else {
+    res.status(404)
+    throw new Error('Beat not found')
+  }
+})
+
+export { getBeats, getBeatById, deleteBeat, addBeat, updateBeat }
