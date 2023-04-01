@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormContainer } from '../components'
-import { listBeatDetails } from '../actions/beatActions'
+import { listBeatDetails, updateBeat } from '../actions/beatActions'
+import { BEAT_UPDATE_RESET } from '../constants/beatConstants'
 
 export default function BeatEditScreen() {
   const { id } = useParams()
@@ -22,30 +23,56 @@ export default function BeatEditScreen() {
   const beatDetails = useSelector((state) => state.beatDetails)
   const { loading, error, beat } = beatDetails
 
+  const beatUpdate = useSelector((state) => state.beatUpdate)
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = beatUpdate
+
   useEffect(() => {
-    if (!beat.name || beat._id !== id) {
-      dispatch(listBeatDetails(id))
+    if (successUpdate) {
+      dispatch({ type: BEAT_UPDATE_RESET })
+      navigate('/admin/beatList')
     } else {
-      setName(beat.name)
-      setImage(beat.image)
-      setFile(beat.file)
-      setKey(beat.key)
-      setDescription(beat.description)
-      setTags(beat.tags)
-      setTypeBeat(beat.typeBeat)
-      setBPM(beat.bpm)
+      if (!beat.name || beat._id !== id) {
+        dispatch(listBeatDetails(id))
+      } else {
+        setName(beat.name)
+        setImage(beat.image)
+        setFile(beat.file)
+        setKey(beat.key)
+        setDescription(beat.description)
+        setTags(beat.tags)
+        setTypeBeat(beat.typeBeat)
+        setBPM(beat.bpm)
+      }
     }
-  }, [dispatch, id, beat])
+  }, [dispatch, id, beat, successUpdate, navigate])
   const submitHandler = (e) => {
     e.preventDefault()
-    // update beat
+    dispatch(
+      updateBeat({
+        _id: id,
+        name,
+        price,
+        image,
+        file,
+        BPM,
+        key,
+        description,
+        tags,
+        typeBeat,
+      })
+    )
   }
   return (
     <>
       <Link to='/admin/beatlist'>Go Back</Link>
       <FormContainer>
         <h1 className='text-9xl mt-10 text-golden'>Edit Beat</h1>
-
+        {loadingUpdate && <h2>Loading...</h2>}
+        {errorUpdate && <h2>{errorUpdate}</h2>}
         {loading ? (
           <h2>Loading...</h2>
         ) : error ? (

@@ -39,7 +39,7 @@ export default function BeatListScreen() {
     } else {
       dispatch(listBeats())
     }
-  }, [dispatch, userLogin, successDelete, successAdd, addedBeat])
+  }, [dispatch, userLogin, successDelete, successAdd, addedBeat, navigate])
 
   const addBeatHandler = () => {
     dispatch(addBeat())

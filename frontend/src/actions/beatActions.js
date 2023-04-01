@@ -12,6 +12,9 @@ import {
   BEAT_LIST_FAIL,
   BEAT_LIST_REQUEST,
   BEAT_LIST_SUCCESS,
+  BEAT_UPDATE_FAIL,
+  BEAT_UPDATE_REQUEST,
+  BEAT_UPDATE_SUCCESS,
 } from '../constants/beatConstants'
 
 export const listBeats = () => async (dispatch) => {
@@ -103,6 +106,39 @@ export const addBeat = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: BEAT_ADD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const updateBeat = (beat) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BEAT_UPDATE_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const { data } = await axios.put(`/api/beats/${beat._id}`, beat, config)
+
+    dispatch({
+      type: BEAT_UPDATE_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: BEAT_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

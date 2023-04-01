@@ -12,6 +12,10 @@ import {
   BEAT_LIST_FAIL,
   BEAT_LIST_REQUEST,
   BEAT_LIST_SUCCESS,
+  BEAT_UPDATE_FAIL,
+  BEAT_UPDATE_REQUEST,
+  BEAT_UPDATE_RESET,
+  BEAT_UPDATE_SUCCESS,
 } from '../constants/beatConstants'
 
 export const beatListReducer = (state = { beats: [] }, action) => {
@@ -69,6 +73,21 @@ export const beatAddReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case BEAT_ADD_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const beatUpdateReducer = (state = { beat: {} }, action) => {
+  switch (action.type) {
+    case BEAT_UPDATE_REQUEST:
+      return { loading: true }
+    case BEAT_UPDATE_SUCCESS:
+      return { loading: false, success: true, beat: action.payload }
+    case BEAT_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
+    case BEAT_UPDATE_RESET:
+      return { beat: {} }
     default:
       return state
   }
