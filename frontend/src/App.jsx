@@ -13,6 +13,7 @@ import OrderScreen from './screens/OrderScreen'
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import BeatListScreen from './screens/BeatListScreen'
+import BeatEditScreen from './screens/BeatEditScreen'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path='/' element={<HomeScreen />} />
             <Route path='/beat/:id' element={<BeatScreen />} />
             <Route path='/admin/beatlist' element={<BeatListScreen />} />
+            <Route path='/admin/beat/:id/edit' element={<BeatEditScreen />} />
             <Route path='/cart/:id?' element={<CartScreen />} />
             <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
