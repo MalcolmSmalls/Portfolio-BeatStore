@@ -5,6 +5,7 @@ import {
   beatListReducer,
   beatDetailsReducer,
   beatDeleteReducer,
+  beatAddReducer,
 } from './reducers/beatReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   beatList: beatListReducer,
   beatDetails: beatDetailsReducer,
   beatDelete: beatDeleteReducer,
+  beatAdd: beatAddReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

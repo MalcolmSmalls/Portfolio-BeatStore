@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { listBeats, deleteBeat } from '../actions/beatActions'
+import { listBeats, deleteBeat, addBeat } from '../actions/beatActions'
+import { BEAT_ADD_RESET } from '../constants/beatConstants'
 
 export default function BeatListScreen() {
   const navigate = useNavigate()
@@ -19,16 +20,29 @@ export default function BeatListScreen() {
     success: successDelete,
   } = beatDelete
 
+  const beatAdd = useSelector((state) => state.beatAdd)
+  const {
+    loading: loadingAdd,
+    error: errorAdd,
+    success: successAdd,
+    beat: addedBeat,
+  } = beatAdd
+
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listBeats())
-    } else {
+    dispatch({ type: BEAT_ADD_RESET })
+    if (!userInfo.isAdmin) {
       navigate('/login')
     }
-  }, [dispatch, userLogin, successDelete])
+
+    if (successAdd) {
+      navigate(`/admin/beat/${addedBeat._id}/edit`)
+    } else {
+      dispatch(listBeats())
+    }
+  }, [dispatch, userLogin, successDelete, successAdd, addedBeat])
 
   const addBeatHandler = () => {
-    console.log('hi')
+    dispatch(addBeat())
   }
 
   const deleteHandler = (id) => {
@@ -47,6 +61,8 @@ export default function BeatListScreen() {
       </button>
       {loadingDelete && <h2>Loading...</h2>}
       {errorDelete && <h2>{errorDelete}</h2>}
+      {loadingAdd && <h2>Loading...</h2>}
+      {errorAdd && <h2>{errorAdd}</h2>}
       {loading ? (
         <h2>Loading</h2>
       ) : error ? (

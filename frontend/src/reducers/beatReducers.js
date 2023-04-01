@@ -1,4 +1,8 @@
 import {
+  BEAT_ADD_FAIL,
+  BEAT_ADD_REQUEST,
+  BEAT_ADD_RESET,
+  BEAT_ADD_SUCCESS,
   BEAT_DELETE_FAIL,
   BEAT_DELETE_REQUEST,
   BEAT_DELETE_SUCCESS,
@@ -50,6 +54,21 @@ export const beatDeleteReducer = (
       return { loading: false, success: true }
     case BEAT_DELETE_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const beatAddReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BEAT_ADD_REQUEST:
+      return { loading: true }
+    case BEAT_ADD_SUCCESS:
+      return { loading: false, success: true, beat: action.payload }
+    case BEAT_ADD_FAIL:
+      return { loading: false, error: action.payload }
+    case BEAT_ADD_RESET:
+      return {}
     default:
       return state
   }
