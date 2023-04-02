@@ -88,4 +88,51 @@ const updateBeat = asyncHandler(async (req, res) => {
   }
 })
 
-export { getBeats, getBeatById, deleteBeat, addBeat, updateBeat }
+// @desc Create new review
+// @route POST /api/beats/:id/reviews
+// @access Private
+const createBeatReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body
+
+  const beat = await Beat.findById(req.params.id)
+
+  if (beat) {
+    const alreadyReviewed = beat.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    )
+
+    if (alreadyReviewed) {
+      res.status(400)
+      throw new Error('Product already reviewe')
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    }
+
+    beat.reviews.push(review)
+    beat.numReviews = beat.reviews.length
+
+    beat.rating =
+      beat.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      beat.reviews.length
+
+    await beat.save()
+    res.status(201).json({ message: 'Review added' })
+  } else {
+    res.status(404)
+    throw new Error('Beat not found')
+  }
+})
+
+export {
+  getBeats,
+  getBeatById,
+  deleteBeat,
+  addBeat,
+  updateBeat,
+  createBeatReview,
+}
