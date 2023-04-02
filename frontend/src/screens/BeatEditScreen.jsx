@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FormContainer } from '../components'
 import { listBeatDetails, updateBeat } from '../actions/beatActions'
 import { BEAT_UPDATE_RESET } from '../constants/beatConstants'
+import axios from 'axios'
 
 export default function BeatEditScreen() {
   const { id } = useParams()
@@ -16,6 +17,7 @@ export default function BeatEditScreen() {
   const [tags, setTags] = useState([])
   const [typeBeat, setTypeBeat] = useState('')
   const [BPM, setBPM] = useState(120)
+  const [uploading, setUploading] = useState(false)
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -66,6 +68,27 @@ export default function BeatEditScreen() {
       })
     )
   }
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload', formData, config)
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+
   return (
     <>
       <Link to='/admin/beatlist'>Go Back</Link>
@@ -115,6 +138,8 @@ export default function BeatEditScreen() {
               value={image}
               className='border-2 rounded p-1 w-[80%]'
             />
+            <input type='file' id='image-file' onChange={uploadFileHandler} />
+            {uploading && <span>Loading...</span>}
             <label htmlFor='file' className='text-sm uppercase font-bold'>
               File
             </label>
@@ -126,6 +151,7 @@ export default function BeatEditScreen() {
               value={file}
               className='border-2 rounded p-1 w-[80%]'
             />
+
             <label htmlFor='key' className='text-sm uppercase font-bold'>
               Key
             </label>
