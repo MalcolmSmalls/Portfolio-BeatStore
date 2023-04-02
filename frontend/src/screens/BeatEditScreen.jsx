@@ -11,14 +11,14 @@ export default function BeatEditScreen() {
   const [price, setPrice] = useState(0)
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
-  const [file, setFile] = useState('')
+  const [audio, setAudio] = useState('')
   const [key, setKey] = useState('')
   const [description, setDescription] = useState('')
   const [tags, setTags] = useState([])
   const [typeBeat, setTypeBeat] = useState('')
   const [BPM, setBPM] = useState(120)
-  const [uploading, setUploading] = useState(false)
-
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [uploadingAudio, setUploadingAudio] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -42,7 +42,7 @@ export default function BeatEditScreen() {
       } else {
         setName(beat.name)
         setImage(beat.image)
-        setFile(beat.file)
+        setAudio(beat.file)
         setKey(beat.key)
         setDescription(beat.description)
         setTags(beat.tags)
@@ -59,7 +59,7 @@ export default function BeatEditScreen() {
         name,
         price,
         image,
-        file,
+        file: audio,
         BPM,
         key,
         description,
@@ -68,11 +68,11 @@ export default function BeatEditScreen() {
       })
     )
   }
-  const uploadFileHandler = async (e) => {
+  const uploadImageHandler = async (e) => {
     const file = e.target.files[0]
     const formData = new FormData()
     formData.append('image', file)
-    setUploading(true)
+    setUploadingImage(true)
 
     try {
       const config = {
@@ -80,12 +80,33 @@ export default function BeatEditScreen() {
           'Content-Type': 'multipart/form-data',
         },
       }
-      const { data } = await axios.post('/api/upload', formData, config)
+      const { data } = await axios.post('/api/upload/image', formData, config)
       setImage(data)
-      setUploading(false)
+      setUploadingImage(false)
     } catch (error) {
       console.error(error)
-      setUploading(false)
+      setUploadingImage(false)
+    }
+  }
+
+  const uploadAudioHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('audio', file)
+    setUploadingAudio(true)
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload/audio', formData, config)
+      setAudio(data)
+      setUploadingAudio(false)
+    } catch (error) {
+      console.error(error)
+      setUploadingAudio(false)
     }
   }
 
@@ -138,19 +159,21 @@ export default function BeatEditScreen() {
               value={image}
               className='border-2 rounded p-1 w-[80%]'
             />
-            <input type='file' id='image-file' onChange={uploadFileHandler} />
-            {uploading && <span>Loading...</span>}
-            <label htmlFor='file' className='text-sm uppercase font-bold'>
+            <input type='file' id='image-file' onChange={uploadImageHandler} />
+            {uploadingImage && <span>Loading...</span>}
+            <label htmlFor='audio' className='text-sm uppercase font-bold'>
               File
             </label>
             <input
               type='text'
               placeholder='Enter file url'
-              onChange={(e) => setFile(e.target.value)}
-              id='file'
-              value={file}
+              onChange={(e) => setAudio(e.target.value)}
+              id='audio'
+              value={audio}
               className='border-2 rounded p-1 w-[80%]'
             />
+            <input type='file' id='audio-file' onChange={uploadAudioHandler} />
+            {uploadingAudio && <span>Loading...</span>}
 
             <label htmlFor='key' className='text-sm uppercase font-bold'>
               Key

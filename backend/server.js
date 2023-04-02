@@ -6,7 +6,8 @@ import beatRoutes from './routes/beatRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
+import uploadImageRoutes from './routes/uploadImageRoutes.js'
+import uploadAudioRoutes from './routes/uploadAudioRoutes.js'
 import path from 'path'
 
 dotenv.config()
@@ -22,7 +23,8 @@ app.get('/', (req, res) => {
 app.use('/api/beats', beatRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
-app.use('/api/upload', uploadRoutes)
+app.use('/api/upload/image', uploadImageRoutes)
+app.use('/api/upload/audio', uploadAudioRoutes)
 
 const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, '/frontend/public')))
