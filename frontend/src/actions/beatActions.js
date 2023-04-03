@@ -3,6 +3,9 @@ import {
   BEAT_ADD_FAIL,
   BEAT_ADD_REQUEST,
   BEAT_ADD_SUCCESS,
+  BEAT_CREATE_REVIEW_FAIL,
+  BEAT_CREATE_REVIEW_REQUEST,
+  BEAT_CREATE_REVIEW_SUCCESS,
   BEAT_DELETE_FAIL,
   BEAT_DELETE_REQUEST,
   BEAT_DELETE_SUCCESS,
@@ -146,3 +149,36 @@ export const updateBeat = (beat) => async (dispatch, getState) => {
     })
   }
 }
+
+export const createBeatReview =
+  (beatId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: BEAT_CREATE_REVIEW_REQUEST,
+      })
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      await axios.post(`/api/beats/${beatId}/reviews`, review, config)
+
+      dispatch({
+        type: BEAT_CREATE_REVIEW_SUCCESS,
+      })
+    } catch (error) {
+      dispatch({
+        type: BEAT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }

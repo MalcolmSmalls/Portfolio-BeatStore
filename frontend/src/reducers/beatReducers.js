@@ -3,6 +3,10 @@ import {
   BEAT_ADD_REQUEST,
   BEAT_ADD_RESET,
   BEAT_ADD_SUCCESS,
+  BEAT_CREATE_REVIEW_FAIL,
+  BEAT_CREATE_REVIEW_REQUEST,
+  BEAT_CREATE_REVIEW_RESET,
+  BEAT_CREATE_REVIEW_SUCCESS,
   BEAT_DELETE_FAIL,
   BEAT_DELETE_REQUEST,
   BEAT_DELETE_SUCCESS,
@@ -88,6 +92,21 @@ export const beatUpdateReducer = (state = { beat: {} }, action) => {
       return { loading: false, error: action.payload }
     case BEAT_UPDATE_RESET:
       return { beat: {} }
+    default:
+      return state
+  }
+}
+
+export const beatCreateReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BEAT_CREATE_REVIEW_REQUEST:
+      return { loading: true }
+    case BEAT_CREATE_REVIEW_SUCCESS:
+      return { loading: false, success: true }
+    case BEAT_CREATE_REVIEW_FAIL:
+      return { loading: false, error: action.payload }
+    case BEAT_CREATE_REVIEW_RESET:
+      return {}
     default:
       return state
   }

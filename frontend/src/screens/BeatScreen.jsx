@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Waveform } from '../components'
 import { Rating } from '../components'
-import { listBeatDetails, listBeats } from '../actions/beatActions'
+import { listBeatDetails, createBeatReview } from '../actions/beatActions'
+import { BEAT_CREATE_REVIEW_RESET } from '../constants/beatConstants'
 
 export default function BeatScreen() {
   const navigate = useNavigate()
@@ -11,15 +12,41 @@ export default function BeatScreen() {
   const dispatch = useDispatch()
   // const beat = beats.find((b) => b._id === id)
 
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
+
   const beatDetails = useSelector((state) => state.beatDetails)
   const { loading, error, beat } = beatDetails
 
+  const beatCreateReview = useSelector((state) => state.beatCreateReview)
+  const { error: errorBeatReview, success: successBeatReview } =
+    beatCreateReview
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
+    if (successBeatReview) {
+      alert('Review Submitted!')
+      setRating(0)
+      setComment('')
+      dispatch({ type: BEAT_CREATE_REVIEW_RESET })
+    }
     dispatch(listBeatDetails(id))
-  }, [dispatch, id])
+  }, [dispatch, id, successBeatReview])
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}`)
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(
+      createBeatReview(id, {
+        rating,
+        comment,
+      })
+    )
   }
 
   return (
@@ -77,6 +104,45 @@ export default function BeatScreen() {
           </div>
           <div>
             <Waveform url={beat.file} beatId={beat._id} />
+          </div>
+          <div className='text-sm text-center'>
+            <h2 className='text-9xl'>Reviews</h2>
+            {beat.reviews.length === 0 && <p>No Reviews</p>}
+            <ul>
+              {beat.reviews.map((review) => (
+                <li key={review._id}>
+                  <h4>{review.name}</h4>
+                  <Rating value={review.rating} />
+                  <p>{review.createdAt.substring(0, 10)}</p>
+                  <p>{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+            <h2>Write a review</h2>
+            {errorBeatReview && <p>{errorBeatReview}</p>}
+            {userInfo ? (
+              <form onSubmit={submitHandler}>
+                <select
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                >
+                  <option value=''>Select...</option>
+                  <option value='1'>1 - Poor</option>
+                  <option value='2'>2 - Fair</option>
+                  <option value='3'>3 - Good</option>
+                  <option value='4'>4 - Very Good</option>
+                  <option value='5'>5 - Excellent</option>
+                </select>
+
+                <h3>Comment</h3>
+                <textarea onChange={(e) => setComment(e.target.value)} />
+                <button type='submit'>Submit</button>
+              </form>
+            ) : (
+              <p>
+                Please <Link to='/login'>Log-In</Link> to write a review
+              </p>
+            )}
           </div>
         </>
       )}
