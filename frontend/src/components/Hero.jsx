@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import SearchBox from './SearchBox'
 export default function Hero({
   children: slides,
   autoSlide = false,
@@ -42,16 +42,18 @@ export default function Hero({
           ) : null}
 
           {slideArr[curr].title ? (
-            <h2
-              key={slideArr[curr].subText}
-              className={
-                subTextVisibility
-                  ? 'animate-fade-in-down text-white uppercase text-[30px] tracking-widest '
-                  : 'invisible text-white uppercase text-[30px] tracking-widest '
-              }
-            >
-              {slideArr[curr].subText}
-            </h2>
+            <>
+              <h2
+                key={slideArr[curr].subText}
+                className={
+                  subTextVisibility
+                    ? 'animate-fade-in-down text-white uppercase text-[30px] tracking-widest '
+                    : 'invisible text-white uppercase text-[30px] tracking-widest '
+                }
+              >
+                {slideArr[curr].subText}
+              </h2>
+            </>
           ) : (
             <h2
               key={slideArr[curr].subText}
@@ -61,7 +63,9 @@ export default function Hero({
             </h2>
           )}
         </div>
-
+        <div className='absolute bottom-20 flex items-center justify-center w-screen'>
+          <SearchBox />
+        </div>
         <div className='absolute bottom-4 right-0 left-0 flex items-center justify-center gap-2'>
           {slides.map((item, i) => (
             <div
