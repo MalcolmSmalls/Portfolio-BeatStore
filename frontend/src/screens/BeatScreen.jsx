@@ -105,44 +105,70 @@ export default function BeatScreen() {
           <div>
             <Waveform url={beat.file} beatId={beat._id} />
           </div>
-          <div className='text-sm text-center'>
-            <h2 className='text-9xl'>Reviews</h2>
-            {beat.reviews.length === 0 && <p>No Reviews</p>}
-            <ul>
-              {beat.reviews.map((review) => (
-                <li key={review._id}>
-                  <h4>{review.name}</h4>
-                  <Rating value={review.rating} />
-                  <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
-                </li>
-              ))}
-            </ul>
-            <h2>Write a review</h2>
-            {errorBeatReview && <p>{errorBeatReview}</p>}
-            {userInfo ? (
-              <form onSubmit={submitHandler}>
-                <select
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                >
-                  <option value=''>Select...</option>
-                  <option value='1'>1 - Poor</option>
-                  <option value='2'>2 - Fair</option>
-                  <option value='3'>3 - Good</option>
-                  <option value='4'>4 - Very Good</option>
-                  <option value='5'>5 - Excellent</option>
-                </select>
+          <div className='text-sm '>
+            <h2 className='text-9xl mb-5 text-center'>Reviews</h2>
+            <div className='w-screen flex'>
+              <div className='w-[50%] font-Poppins text-left pl-[10%] p-5'>
+                {beat.reviews.length === 0 && <p>No Reviews</p>}
+                <ul>
+                  {beat.reviews.map((review) => (
+                    <li key={review._id}>
+                      <h4 className='font-bold'>{review.name}</h4>
+                      <div className='flex gap-2 items-center '>
+                        <span className='text-xs'>
+                          <Rating value={review.rating} />
+                        </span>
+                        <p className='text-xs text-gray-500'>
+                          {review.createdAt.substring(0, 10)}
+                        </p>
+                      </div>
 
-                <h3>Comment</h3>
-                <textarea onChange={(e) => setComment(e.target.value)} />
-                <button type='submit'>Submit</button>
-              </form>
-            ) : (
-              <p>
-                Please <Link to='/login'>Log-In</Link> to write a review
-              </p>
-            )}
+                      <p className='mb-5'>{review.comment}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className='w-[50%] font-Poppins p-5'>
+                <h2 className='font-bold'>Write a review</h2>
+                {errorBeatReview && (
+                  <p className='text-red-500 text-xs pb-1'>{errorBeatReview}</p>
+                )}
+                {userInfo ? (
+                  <form onSubmit={submitHandler}>
+                    <select
+                      value={rating}
+                      onChange={(e) => setRating(e.target.value)}
+                      className='border-2 rounded'
+                    >
+                      <option value=''>Select...</option>
+                      <option value='1'>1 - Poor</option>
+                      <option value='2'>2 - Fair</option>
+                      <option value='3'>3 - Good</option>
+                      <option value='4'>4 - Very Good</option>
+                      <option value='5'>5 - Excellent</option>
+                    </select>
+
+                    <h3 className='pt-2 text-xs'>Comment</h3>
+                    <div className='flex flex-col gap-2'>
+                      <textarea
+                        onChange={(e) => setComment(e.target.value)}
+                        className='border-2 w-[60%] h-[100px] rounded'
+                      />
+                      <button
+                        type='submit'
+                        className='border-2 p-1 w-20 rounded bg-golden hover:bg-[#F3B311]'
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <p>
+                    Please <Link to='/login'>Log-In</Link> to write a review
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
         </>
       )}

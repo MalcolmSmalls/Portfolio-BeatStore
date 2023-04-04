@@ -103,7 +103,7 @@ const createBeatReview = asyncHandler(async (req, res) => {
 
     if (alreadyReviewed) {
       res.status(400)
-      throw new Error('Product already reviewe')
+      throw new Error('Product already reviewed')
     }
 
     const review = {
