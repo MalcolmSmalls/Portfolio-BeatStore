@@ -20,22 +20,24 @@ import {
   BEAT_UPDATE_SUCCESS,
 } from '../constants/beatConstants'
 
-export const listBeats = () => async (dispatch) => {
-  try {
-    dispatch({ type: BEAT_LIST_REQUEST })
-    const { data } = await axios.get('/api/beats')
+export const listBeats =
+  (keyword = '') =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: BEAT_LIST_REQUEST })
+      const { data } = await axios.get(`/api/beats?keyword=${keyword}`)
 
-    dispatch({ type: BEAT_LIST_SUCCESS, payload: data })
-  } catch (error) {
-    dispatch({
-      type: BEAT_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
+      dispatch({ type: BEAT_LIST_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: BEAT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
   }
-}
 
 export const listBeatDetails = (id) => async (dispatch) => {
   try {

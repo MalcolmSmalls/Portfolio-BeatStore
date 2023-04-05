@@ -5,7 +5,17 @@ import Beat from '../models/beatModel.js'
 // @route GET /api/beats
 // @access all users
 const getBeats = asyncHandler(async (req, res) => {
-  const beats = await Beat.find({})
+  const keyword = req.query.keyword
+    ? {
+        $or: [
+          { name: { $regex: req.query.keyword, $options: 'i' } },
+          { tags: { $regex: req.query.keyword, $options: 'i' } },
+          { typeBeat: { $regex: req.query.keyword, $options: 'i' } },
+          { key: { $regex: req.query.keyword, $options: 'i' } },
+        ],
+      }
+    : {}
+  const beats = await Beat.find({ ...keyword })
 
   res.json(beats)
 })

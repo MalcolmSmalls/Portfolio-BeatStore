@@ -2,17 +2,19 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBeats } from '../actions/beatActions'
 import { Beat } from '../components'
+import { useParams } from 'react-router-dom'
 
 export default function HomeScreen() {
   const dispatch = useDispatch()
+  const { keyword } = useParams()
 
   const beatList = useSelector((state) => state.beatList)
 
   const { loading, error, beats } = beatList
 
   useEffect(() => {
-    dispatch(listBeats())
-  }, [dispatch])
+    dispatch(listBeats(keyword))
+  }, [dispatch, keyword])
 
   return (
     <>
