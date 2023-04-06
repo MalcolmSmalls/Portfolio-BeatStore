@@ -5,6 +5,7 @@ import { Waveform } from '../components'
 import { Rating } from '../components'
 import { listBeatDetails, createBeatReview } from '../actions/beatActions'
 import { BEAT_CREATE_REVIEW_RESET } from '../constants/beatConstants'
+import Meta from '../components/Meta'
 
 export default function BeatScreen() {
   const navigate = useNavigate()
@@ -51,6 +52,7 @@ export default function BeatScreen() {
 
   return (
     <>
+      <Meta title={`${beat.name} (Produced By Malcolm Smalls)`} />
       {loading || loading === undefined ? (
         <h1>Loading</h1>
       ) : error ? (
