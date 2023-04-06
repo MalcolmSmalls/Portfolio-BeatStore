@@ -34,12 +34,21 @@ function App() {
             <Route path='/' element={<HomeScreen />} />
             <Route path='/beat/:id' element={<BeatScreen />} />
             <Route path='/admin/beatlist' element={<BeatListScreen />} />
+            <Route
+              path='/admin/beatlist/:pageNumber'
+              element={<BeatListScreen />}
+            />
             <Route path='/admin/beat/:id/edit' element={<BeatEditScreen />} />
             <Route path='/cart/:id?' element={<CartScreen />} />
             <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/orderlist' element={<OrderListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
             <Route path='/search/:keyword' element={<HomeScreen />} />
+            <Route path='/page/:pageNumber' element={<HomeScreen />} />
+            <Route
+              path='/search/:keyword/page/:pageNumber'
+              element={<HomeScreen />}
+            />
           </Routes>
         </div>
       </main>

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBeats, deleteBeat, addBeat } from '../actions/beatActions'
 import { BEAT_ADD_RESET } from '../constants/beatConstants'
+import Paginate from '../components/Paginate'
 
 export default function BeatListScreen() {
+  const { pageNumber } = useParams() || 1
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const beatList = useSelector((state) => state.beatList)
-  const { loading, error, beats } = beatList
+  const { loading, error, beats, pages, page } = beatList
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -37,9 +39,17 @@ export default function BeatListScreen() {
     if (successAdd) {
       navigate(`/admin/beat/${addedBeat._id}/edit`)
     } else {
-      dispatch(listBeats())
+      dispatch(listBeats('', pageNumber))
     }
-  }, [dispatch, userLogin, successDelete, successAdd, addedBeat, navigate])
+  }, [
+    dispatch,
+    userLogin,
+    successDelete,
+    successAdd,
+    addedBeat,
+    pageNumber,
+    navigate,
+  ])
 
   const addBeatHandler = () => {
     dispatch(addBeat())
@@ -68,44 +78,47 @@ export default function BeatListScreen() {
       ) : error ? (
         <span>{error}</span>
       ) : (
-        <table className='text-sm font-Poppins w-[70%] text-center'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>TAGS</th>
-              <th>TYPEBEAT</th>
-              <th>BPM</th>
-              <th>KEY</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {beats.map((beat) => (
-              <tr key={beat._id}>
-                <td>{beat._id}</td>
-                <td>{beat.name}</td>
-                <td>${beat.price}</td>
-                <td>{beat.tags}</td>
-                <td>{beat.typeBeat}</td>
-                <td>{beat.bpm}</td>
-                <td>{beat.key}</td>
-                <td>
-                  <Link to={`/admin/beat/${beat._id}/edit`}>
-                    <button>
-                      <i className='fas fa-edit pr-10'></i>
-                    </button>
-                  </Link>
-                  <button onClick={() => deleteHandler(beat._id)}>
-                    <i className='fas fa-trash'></i>
-                  </button>
-                </td>
+        <>
+          <table className='text-sm font-Poppins w-[70%] text-center'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>TAGS</th>
+                <th>TYPEBEAT</th>
+                <th>BPM</th>
+                <th>KEY</th>
+                <th></th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {beats.map((beat) => (
+                <tr key={beat._id}>
+                  <td>{beat._id}</td>
+                  <td>{beat.name}</td>
+                  <td>${beat.price}</td>
+                  <td>{beat.tags}</td>
+                  <td>{beat.typeBeat}</td>
+                  <td>{beat.bpm}</td>
+                  <td>{beat.key}</td>
+                  <td>
+                    <Link to={`/admin/beat/${beat._id}/edit`}>
+                      <button>
+                        <i className='fas fa-edit pr-10'></i>
+                      </button>
+                    </Link>
+                    <button onClick={() => deleteHandler(beat._id)}>
+                      <i className='fas fa-trash'></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Paginate pages={pages} page={page} isAdmin={true} />
+        </>
       )}
     </>
   )

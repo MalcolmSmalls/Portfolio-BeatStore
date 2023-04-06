@@ -27,7 +27,12 @@ export const beatListReducer = (state = { beats: [] }, action) => {
     case BEAT_LIST_REQUEST:
       return { loading: true, beats: [] }
     case BEAT_LIST_SUCCESS:
-      return { loading: false, beats: action.payload }
+      return {
+        loading: false,
+        beats: action.payload.beats,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
     case BEAT_LIST_FAIL:
       return { loading: false, error: action.payload }
     default:

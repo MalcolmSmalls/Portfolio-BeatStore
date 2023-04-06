@@ -21,11 +21,13 @@ import {
 } from '../constants/beatConstants'
 
 export const listBeats =
-  (keyword = '') =>
+  (keyword = '', pageNumber = '') =>
   async (dispatch) => {
     try {
       dispatch({ type: BEAT_LIST_REQUEST })
-      const { data } = await axios.get(`/api/beats?keyword=${keyword}`)
+      const { data } = await axios.get(
+        `/api/beats?keyword=${keyword}&pageNumber=${pageNumber}`
+      )
 
       dispatch({ type: BEAT_LIST_SUCCESS, payload: data })
     } catch (error) {

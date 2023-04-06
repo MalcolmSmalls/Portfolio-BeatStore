@@ -5,6 +5,8 @@ import Beat from '../models/beatModel.js'
 // @route GET /api/beats
 // @access all users
 const getBeats = asyncHandler(async (req, res) => {
+  const pageSize = 4
+  const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword
     ? {
         $or: [
@@ -15,9 +17,13 @@ const getBeats = asyncHandler(async (req, res) => {
         ],
       }
     : {}
-  const beats = await Beat.find({ ...keyword })
 
-  res.json(beats)
+  const count = await Beat.countDocuments({ ...keyword })
+  const beats = await Beat.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  res.json({ beats, page, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc Fetch single beat
