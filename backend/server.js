@@ -18,6 +18,19 @@ const app = express()
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
+
+app.use(express.json())
+
+app.use('/api/beats', beatRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/orders', orderRoutes)
+app.use('/api/upload/image', uploadImageRoutes)
+app.use('/api/upload/audio', uploadAudioRoutes)
+
+app.get('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+)
+
 const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, '/frontend/public')))
 
@@ -31,17 +44,6 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API is running.....')
   })
 }
-app.use(express.json())
-
-app.use('/api/beats', beatRoutes)
-app.use('/api/users', userRoutes)
-app.use('/api/orders', orderRoutes)
-app.use('/api/upload/image', uploadImageRoutes)
-app.use('/api/upload/audio', uploadAudioRoutes)
-
-app.get('/api/config/paypal', (req, res) =>
-  res.send(process.env.PAYPAL_CLIENT_ID)
-)
 
 app.use(notFound)
 
