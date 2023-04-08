@@ -14,7 +14,7 @@ dist
 dist-ssr
 *.local
 
-/frontend/dist
+
 
 # Editor directories and files
 .vscode/*
