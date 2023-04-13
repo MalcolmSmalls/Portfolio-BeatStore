@@ -19,14 +19,14 @@ export default function HomeScreen() {
   }, [dispatch, keyword, pageNumber])
 
   return (
-    <>
+    <div id='beats'>
       {loading ? (
         <h1>Loading</h1>
       ) : error ? (
         <h1>{error}</h1>
       ) : (
         <>
-          <ul id='beats' className='container flex flex-col'>
+          <ul className='container flex flex-col h-[70vh]'>
             {beats.map((beat) => (
               <Beat beat={beat} />
             ))}
@@ -38,6 +38,6 @@ export default function HomeScreen() {
           />
         </>
       )}
-    </>
+    </div>
   )
 }

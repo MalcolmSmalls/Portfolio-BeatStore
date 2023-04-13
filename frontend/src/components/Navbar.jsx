@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
@@ -7,6 +7,15 @@ export default function Navbar() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const dispatch = useDispatch()
+
+  const beats = useRef(null)
+
+  const scrollToSection = (elementRef) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop,
+      behavior: 'smooth',
+    })
+  }
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -22,9 +31,9 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to='/#beats' className='hover:text-main-dark'>
+            <a href='#beats' className='hover:text-main-dark'>
               Beats
-            </Link>
+            </a>
           </li>
 
           <li>
