@@ -85,29 +85,29 @@ export default function MainPlayer() {
   }
 
   return (
-    <div className='h-[16vh] bg-main-dark flex justify-center text-white gap-5 items-center'>
+    <div className='lg:h-[16vh] h-24 bg-main-dark flex justify-center text-white lg:gap-5 gap-2 pl-2 lg:pl-0 items-center lg:w-full w-full'>
       <audio onLoadedMetadata={onLoadedMetadata} ref={audioPlayer} src={apple}>
         {' '}
       </audio>
       <button>
         <i
-          className='fa-solid fa-backward-fast text-lg'
+          className='fa-solid fa-backward-fast lg:text-lg text-sm'
           onClick={backThirty}
         ></i>
       </button>
 
-      <div className=' border-4 rounded-full h-16 w-16 flex justify-center items-center'>
+      <div className='lg:border-4 border-2 rounded-full lg:h-16 lg:w-16 w-12 h-12 flex justify-center items-center'>
         <button onClick={togglePlayPause}>
           {!isPlaying ? (
-            <i className='fa-solid fa-play text-lg'></i>
+            <i className='fa-solid fa-play lg:text-lg text-sm'></i>
           ) : (
-            <i className='fa-solid fa-pause text-lg'></i>
+            <i className='fa-solid fa-pause lg:text-lg text-sm'></i>
           )}
         </button>
       </div>
       <button>
         <i
-          className='fa-solid fa-forward-fast text-lg'
+          className='fa-solid fa-forward-fast lg:text-lg text-sm'
           onClick={forwardThirty}
         ></i>
       </button>
@@ -121,7 +121,7 @@ export default function MainPlayer() {
           type='range'
           className={
             styles.progressBar +
-            ' accent-white  bg-[#5b5b6a] rounded-lg h-2  appearance-none overflow-hidden w-96'
+            ' accent-white  bg-[#5b5b6a] rounded-lg h-2  appearance-none overflow-hidden lg:w-96 w-full'
           }
           defaultValue='0'
           ref={progressBar}
