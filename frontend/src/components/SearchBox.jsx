@@ -24,8 +24,8 @@ export default function SearchBox() {
           <input
             type='search'
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder='Search Products...'
-            className='w-[500px] p-4 text-sm rounded pr-24'
+            placeholder='Search Beats...'
+            className='lg:w-[500px] w-full p-4 text-sm rounded pr-24'
           />
           <button
             type='submit'
