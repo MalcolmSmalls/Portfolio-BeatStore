@@ -25,13 +25,13 @@ function Header() {
           {slides.map((s) => (
             <>
               <div
-                className='flex-none h-screen w-screen'
+                className='flex-none bg-center lg:bg-[0%_40%] h-screen w-screen bg-cover'
                 style={{
                   backgroundImage: `url(${s.picture})`,
                   width: '100%',
                   height: '84vh',
-                  backgroundSize: 'cover',
-                  backgroundPosition: '0% 40%',
+                  // backgroundSize: 'cover',
+                  // backgroundPosition: '0% 40%',
                 }}
               ></div>
             </>

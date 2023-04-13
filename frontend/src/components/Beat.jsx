@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 
 export default function Beat({ beat }) {
   return (
-    <div className='flex items-center justify-end  w-full lg:text-[7rem] text-[1.68rem] gap-3 lg:gap-0 lg:mb-4 mb-2'>
+    <div
+      id='beats'
+      className='flex items-center justify-end  w-full lg:text-[7rem] text-[1.68rem] gap-3 lg:gap-0 lg:mb-0 mb-2'
+    >
       <li className='w-[40%] flex-1 flex justify-end '>
         <Link to={`/beat/${beat._id}`}>{beat.name}</Link>
         <span className='text-golden'>.</span>

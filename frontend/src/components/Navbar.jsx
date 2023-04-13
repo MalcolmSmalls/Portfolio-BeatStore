@@ -23,8 +23,8 @@ export default function Navbar() {
 
   return (
     <nav>
-      <div className='h-10 bg-white'>
-        <ul className='flex  gap-10 uppercase absolute  justify-center w-full h-20 top-3 z-20 text-golden pl-10 font-PressStart text-xs'>
+      <div className='h-10  bg-white'>
+        <ul className='flex  items-center lg:items-start text-center lg:gap-10 gap-3 text-[.500rem] uppercase absolute justify-center w-full lg:h-20 top-3 z-20 text-golden lg:pl-10 font-PressStart lg:text-xs'>
           <li>
             <Link to='/' className='hover:text-main-dark'>
               Home
@@ -36,11 +36,11 @@ export default function Navbar() {
             </a>
           </li>
 
-          <li>
+          {/* <li>
             <Link to='#' className='hover:text-main-dark'>
               Contact
             </Link>
-          </li>
+          </li> */}
           <li>
             {userInfo ? (
               <Link to='/profile' className='hover:text-main-dark'>

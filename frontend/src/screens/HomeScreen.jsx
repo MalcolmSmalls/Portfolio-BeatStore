@@ -19,7 +19,7 @@ export default function HomeScreen() {
   }, [dispatch, keyword, pageNumber])
 
   return (
-    <div id='beats'>
+    <div>
       {loading ? (
         <h1>Loading</h1>
       ) : error ? (
