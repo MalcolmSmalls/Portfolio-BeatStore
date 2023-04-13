@@ -34,7 +34,7 @@ export default function Hero({
           {slideArr[curr].title ? (
             <h1
               key={slideArr[curr].title}
-              className=' text-white uppercase text-[60px] font-PressStart animate-fade-in-up'
+              className=' text-white uppercase lg:text-[60px] text-20 font-PressStart animate-fade-in-up'
               onAnimationEnd={() => setSubTextVisibility(true)}
             >
               {slideArr[curr].title}
@@ -47,8 +47,8 @@ export default function Hero({
                 key={slideArr[curr].subText}
                 className={
                   subTextVisibility
-                    ? 'animate-fade-in-down text-white uppercase text-[30px] tracking-widest '
-                    : 'invisible text-white uppercase text-[30px] tracking-widest '
+                    ? 'animate-fade-in-down text-white uppercase lg:text-[30px] text-10 tracking-widest '
+                    : 'invisible text-white uppercase lg:text-[30px] text-10 tracking-widest '
                 }
               >
                 {slideArr[curr].subText}
@@ -57,7 +57,7 @@ export default function Hero({
           ) : (
             <h2
               key={slideArr[curr].subText}
-              className='animate-fade-in text-white uppercase text-[30px] tracking-widest '
+              className='animate-fade-in text-white uppercase lg:text-[30px] text-10 text-center tracking-widest '
             >
               {slideArr[curr].subText}
             </h2>
