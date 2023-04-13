@@ -3,7 +3,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <footer>
-      <div className='flex lg:flex-row bg-main-dark text-white font-Poppins lg:justify-between p-10 px-60 lg:w-full flex-col items-center gap-2'>
+      <div className='flex lg:flex-row bg-main-dark text-white font-Poppins lg:justify-between lg:p-10  py-5 lg:px-60 lg:w-full flex-col items-center gap-2'>
         <div className='uppercase text-center w-52 lg:w-80'>
           Copyright &copy; 2022 Malcolm Smalls
         </div>
