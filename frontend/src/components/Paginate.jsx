@@ -10,7 +10,7 @@ export default function Paginate({
   return (
     pages > 1 && (
       <>
-        <div className='text-2xl flex gap-5 justify-center mt-20 items-center'>
+        <div className='text-2xl flex gap-5 justify-center mt-20 items-center border-2'>
           {[...Array(pages).keys()].map((x) => (
             <Link
               key={x + 1}

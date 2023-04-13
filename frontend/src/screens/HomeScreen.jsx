@@ -26,7 +26,7 @@ export default function HomeScreen() {
         <h1>{error}</h1>
       ) : (
         <>
-          <ul className='container flex flex-col h-[70vh]'>
+          <ul className='container flex flex-col h-[70vh] w-[90vw]'>
             {beats.map((beat) => (
               <Beat beat={beat} />
             ))}
