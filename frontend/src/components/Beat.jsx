@@ -14,7 +14,11 @@ export default function Beat({ beat, handleClick, isPlaying, target }) {
       </li>
       <div className='w-[15%] lg:w-[10%]  flex justify-center'>
         <div
-          className='flex items-center justify-center border-8 rounded-full lg:h-20 lg:w-20 w-12 h-12 flex-none hover:text-golden hover:border-golden cursor-pointer'
+          className={`${
+            isPlaying && beat._id === target
+              ? 'text-golden border-golden  '
+              : 'hover:border-golden hover:text-golden'
+          } flex items-center justify-center border-8 rounded-full lg:h-20 lg:w-20 w-12 h-12 flex-none cursor-pointer`}
           onClick={(e) => handleClick(e, beat)}
         >
           {isPlaying && beat._id === target ? (
