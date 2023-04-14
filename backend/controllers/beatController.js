@@ -5,7 +5,7 @@ import Beat from '../models/beatModel.js'
 // @route GET /api/beats
 // @access all users
 const getBeats = asyncHandler(async (req, res) => {
-  const pageSize = 4
+  const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword
     ? {

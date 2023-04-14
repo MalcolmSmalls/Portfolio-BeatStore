@@ -22,7 +22,7 @@ function App() {
       <Header />
       <MainPlayer />
 
-      <main className='min-h-[82vh]' id='beats'>
+      <main>
         <div className=' flex font-Staatliches justify-center flex-col items-center lg:text-9xl text-5xl mt-[20px] mb-[30px]'>
           <Routes>
             <Route path='/order/:id' element={<OrderScreen />} />

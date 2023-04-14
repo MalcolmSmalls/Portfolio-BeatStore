@@ -5,7 +5,7 @@ export default function Beat({ beat }) {
   return (
     <div
       id='beats'
-      className='flex items-center justify-end  w-full lg:text-[7rem] text-[1.68rem] gap-3 lg:gap-0 lg:mb-0 mb-2'
+      className='flex items-center justify-end  w-full lg:text-[7rem] text-[1.66rem] gap-3 lg:gap-0 lg:mb-0 mb-[0px]'
     >
       <li className='w-[40%] flex-1 flex justify-end '>
         <Link to={`/beat/${beat._id}`}>{beat.name}</Link>
@@ -16,7 +16,7 @@ export default function Beat({ beat }) {
           <i className='fa-solid fa-play text-base lg:text-xl'></i>
         </div>
       </div>
-      <div className='flex flex-1 flex-col text-[.500rem] lg:text-xs  leading-3 font-Poppins items-start justify-center lg:w-[40%] uppercase  text-left'>
+      <div className='flex flex-1 flex-col text-[.500rem] lg:text-xs  leading-3 font-Poppins items-start justify-center lg:w-[40%] uppercase  text-left h-20'>
         <ul>
           <li>
             <span className='font-bold'>BPM:</span> <span>{beat.bpm}</span>
