@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import MainPlayer from './MainPlayer'
 
-export default function Beat({ beat }) {
+export default function Beat({ beat, handleClick }) {
   return (
     <div
       id='beats'
@@ -12,7 +13,10 @@ export default function Beat({ beat }) {
         <span className='text-golden'>.</span>
       </li>
       <div className='w-[15%] lg:w-[10%]  flex justify-center'>
-        <div className='flex items-center justify-center border-8 rounded-full lg:h-20 lg:w-20 w-12 h-12 flex-none '>
+        <div
+          className='flex items-center justify-center border-8 rounded-full lg:h-20 lg:w-20 w-12 h-12 flex-none hover:text-golden hover:border-golden cursor-pointer'
+          onClick={() => handleClick(beat)}
+        >
           <i className='fa-solid fa-play text-base lg:text-xl'></i>
         </div>
       </div>

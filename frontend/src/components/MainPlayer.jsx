@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import styles from '../styles/AudioPlayer.module.css'
 import apple from '../assets/apple.mp3'
 
-export default function MainPlayer() {
+export default function MainPlayer({ playingFile }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -86,7 +86,11 @@ export default function MainPlayer() {
 
   return (
     <div className='lg:h-[16vh] h-24 bg-main-dark flex justify-center text-white lg:gap-5 gap-2 pl-2 lg:pl-0 items-center lg:w-full w-full'>
-      <audio onLoadedMetadata={onLoadedMetadata} ref={audioPlayer} src={apple}>
+      <audio
+        onLoadedMetadata={onLoadedMetadata}
+        ref={audioPlayer}
+        src={playingFile}
+      >
         {' '}
       </audio>
       <button>

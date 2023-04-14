@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Footer, Header, MainPlayer } from './components'
 import HomeScreen from './screens/HomeScreen'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -15,12 +15,29 @@ import UserEditScreen from './screens/UserEditScreen'
 import BeatListScreen from './screens/BeatListScreen'
 import BeatEditScreen from './screens/BeatEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const beatList = useSelector((state) => state.beatList)
+
+  const { loading, error, beats, page, pages } = beatList
+
+  const [playingFile, setPlayingFile] = useState('')
+
+  useEffect(() => {
+    if (beats[0]) {
+      setPlayingFile(beats[0].file)
+    }
+  }, [beats])
+
+  const handleClick = (beat) => {
+    setPlayingFile(beat.file)
+  }
+
   return (
     <BrowserRouter>
       <Header />
-      <MainPlayer />
+      <MainPlayer playingFile={loading ? null : playingFile} />
 
       <main>
         <div className=' flex font-Staatliches justify-center flex-col items-center lg:text-9xl text-5xl mt-[20px] mb-[30px]'>
@@ -31,7 +48,10 @@ function App() {
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/login' element={<LoginScreen />} />
-            <Route path='/' element={<HomeScreen />} />
+            <Route
+              path='/'
+              element={<HomeScreen handleClick={handleClick} />}
+            />
             <Route path='/beat/:id' element={<BeatScreen />} />
             <Route path='/admin/beatlist' element={<BeatListScreen />} />
             <Route
