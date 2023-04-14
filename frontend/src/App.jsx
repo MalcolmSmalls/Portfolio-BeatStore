@@ -34,16 +34,22 @@ function App() {
 
   const handleClick = (e, beat) => {
     let prevIsPlaying = isPlaying
-    console.log(e)
-    setPlayingFile(beat.file)
-    setIsPlaying(!prevIsPlaying)
-    setTarget(beat._id)
+    if (!target) {
+      setIsPlaying(!prevIsPlaying)
+      setTarget(beat._id)
+      setPlayingFile(beat.file)
+    } else if (beat._id !== target) {
+      setTarget(beat._id)
+      setPlayingFile(beat.file)
+    } else {
+      setIsPlaying(!prevIsPlaying)
+    }
   }
 
   return (
     <BrowserRouter>
       <Header />
-      <MainPlayer playingFile={playingFile} isPlaying={isPlaying} />
+      <MainPlayer playingFile={playingFile} startPlaying={isPlaying} />
 
       <main>
         <div className=' flex font-Staatliches justify-center flex-col items-center lg:text-9xl text-5xl mt-[20px] mb-[30px]'>
