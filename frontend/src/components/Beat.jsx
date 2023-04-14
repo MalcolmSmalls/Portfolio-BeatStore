@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import MainPlayer from './MainPlayer'
 
-export default function Beat({ beat, handleClick }) {
+export default function Beat({ beat, handleClick, isPlaying, target }) {
   return (
     <div
       id='beats'
@@ -15,9 +15,13 @@ export default function Beat({ beat, handleClick }) {
       <div className='w-[15%] lg:w-[10%]  flex justify-center'>
         <div
           className='flex items-center justify-center border-8 rounded-full lg:h-20 lg:w-20 w-12 h-12 flex-none hover:text-golden hover:border-golden cursor-pointer'
-          onClick={() => handleClick(beat)}
+          onClick={(e) => handleClick(e, beat)}
         >
-          <i className='fa-solid fa-play text-base lg:text-xl'></i>
+          {isPlaying && beat._id === target ? (
+            <i className='fa-solid fa-pause text-base lg:text-xl'></i>
+          ) : (
+            <i className='fa-solid fa-play text-base lg:text-xl'></i>
+          )}
         </div>
       </div>
       <div className='flex flex-1 flex-col text-[.500rem] lg:text-xs  leading-3 font-Poppins items-start justify-center lg:w-[40%] uppercase  text-left h-20'>

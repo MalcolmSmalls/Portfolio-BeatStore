@@ -23,6 +23,8 @@ function App() {
   const { loading, error, beats, page, pages } = beatList
 
   const [playingFile, setPlayingFile] = useState('')
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [target, setTarget] = useState(null)
 
   useEffect(() => {
     if (beats[0]) {
@@ -30,14 +32,17 @@ function App() {
     }
   }, [beats])
 
-  const handleClick = (beat) => {
+  const handleClick = (e, beat) => {
+    console.log(e)
     setPlayingFile(beat.file)
+    setIsPlaying(true)
+    setTarget(beat._id)
   }
 
   return (
     <BrowserRouter>
       <Header />
-      <MainPlayer playingFile={loading ? null : playingFile} />
+      <MainPlayer playingFile={playingFile} />
 
       <main>
         <div className=' flex font-Staatliches justify-center flex-col items-center lg:text-9xl text-5xl mt-[20px] mb-[30px]'>
@@ -50,7 +55,13 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route
               path='/'
-              element={<HomeScreen handleClick={handleClick} />}
+              element={
+                <HomeScreen
+                  handleClick={handleClick}
+                  isPlaying={isPlaying}
+                  target={target}
+                />
+              }
             />
             <Route path='/beat/:id' element={<BeatScreen />} />
             <Route path='/admin/beatlist' element={<BeatListScreen />} />

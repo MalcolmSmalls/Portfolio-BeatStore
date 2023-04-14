@@ -5,7 +5,7 @@ import { Beat } from '../components'
 import { useParams } from 'react-router-dom'
 import Paginate from '../components/Paginate'
 
-export default function HomeScreen({ handleClick }) {
+export default function HomeScreen({ handleClick, isPlaying, target }) {
   const dispatch = useDispatch()
   const { keyword } = useParams()
   const { pageNumber } = useParams() || 1
@@ -35,7 +35,12 @@ export default function HomeScreen({ handleClick }) {
         <>
           <ul className='container flex flex-col lg:h-[108vh] h-fit w-[90vw]'>
             {beats.map((beat) => (
-              <Beat beat={beat} handleClick={handleClick} />
+              <Beat
+                beat={beat}
+                handleClick={handleClick}
+                isPlaying={isPlaying}
+                target={target}
+              />
             ))}
           </ul>
           <Paginate
