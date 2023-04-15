@@ -68,35 +68,37 @@ export default function BeatScreen() {
             </p>
           </section>
 
-          <div className='flex justify-center font-Poppins text-sm w-full  mt-10  gap-20'>
-            <div className='flex flex-col w-1/3 items-end'>
+          <div className='flex lg:flex-row flex-col items-center lg:items-start lg:justify-center font-Poppins text-sm w-full  mt-10  lg:gap-20 gap-5'>
+            <div className='flex lg:flex-col lg:w-1/3 w-full justify-center lg:items-end '>
               <img
                 className='object-cover h-96 w-96'
                 src={beat.image}
                 alt={beat.name}
               />
             </div>
-            <div className='flex flex-col w-1/3 text-lighter-dark text-xl'>
+            <div className='flex flex-col w-fit text-center lg:text-left lg:w-1/3 text-lighter-dark text-xl'>
               <section>
                 <span className='font-bold'>BPM</span>
-                <span className='block pb-2'>{beat.bpm}</span>
+                <span className='block lg:pb-2 pb-4'>{beat.bpm}</span>
                 <span className='font-bold'>Key</span>
-                <span className='block pb-2'>{beat.key}</span>
+                <span className='block lg:pb-2 pb-4'>{beat.key}</span>
                 <span className='font-bold'>Tags</span>
-                <span className='block pb-2'>{`${beat.tags[0]}, ${beat.tags[1]}, ${beat.tags[2]}`}</span>
+                <span className='block lg:pb-2 pb-4'>{`${beat.tags[0]}, ${beat.tags[1]}, ${beat.tags[2]}`}</span>
                 <span className='font-bold'>Type Beat</span>
-                <span className='block pb-2'>{`${beat.typeBeat[0]}, ${beat.typeBeat[1]}, ${beat.typeBeat[2]}`}</span>
+                <span className='block lg:pb-2 pb-4'>{`${beat.typeBeat[0]}, ${beat.typeBeat[1]}, ${beat.typeBeat[2]}`}</span>
                 <span className='font-bold'>Rating</span>
-                <span className='block pb-2'>
+                <span className='block lg:pb-2 pb-4'>
                   <Rating
                     value={beat.rating}
-                    text={`out of ${beat.numReviews} reviews`}
+                    text={`out of ${beat.numReviews} review${
+                      beat.numReviews === 1 ? '' : 's'
+                    }`}
                   />
                 </span>
                 <span className='font-bold'>Price</span>
-                <span className='block pb-2'>${beat.price}</span>
+                <span className='block lg:pb-2 pb-4'>${beat.price}</span>
                 <button
-                  className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark '
+                  className='ml-auto mr-auto lg:ml-0 lg:mr-0 uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark '
                   onClick={addToCartHandler}
                 >
                   Add to Cart
@@ -104,13 +106,15 @@ export default function BeatScreen() {
               </section>
             </div>
           </div>
-          <div>
+          <div className='w-full'>
             <Waveform url={beat.file} beatId={beat._id} />
           </div>
           <div className='text-sm '>
-            <h2 className='text-9xl mb-5 text-center'>Reviews</h2>
-            <div className='w-screen flex'>
-              <div className='w-[50%] font-Poppins text-left pl-[10%] p-5'>
+            <h2 className='lg:text-9xl text-8xl mb-5 text-center lg:mt-0 mt-5'>
+              Reviews
+            </h2>
+            <div className='w-screen flex lg:flex-row flex-col'>
+              <div className='lg:w-[50%] w-[90%] font-Poppins text-left pl-[10%] p-5'>
                 {beat.reviews.length === 0 && <p>No Reviews</p>}
                 <ul>
                   {beat.reviews.map((review) => (
@@ -151,14 +155,14 @@ export default function BeatScreen() {
                     </select>
 
                     <h3 className='pt-2 text-xs'>Comment</h3>
-                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-2 w-[90vw] lg:w-full'>
                       <textarea
                         onChange={(e) => setComment(e.target.value)}
-                        className='border-2 w-[60%] h-[100px] rounded'
+                        className='border-2 lg:w-[60%] w-[90vw] h-[100px] rounded mb-4 lg-mb-0'
                       />
                       <button
                         type='submit'
-                        className='border-2 p-1 w-20 rounded bg-golden hover:bg-[#F3B311]'
+                        className='border-2 p-1 w-20 rounded bg-golden hover:bg-[#F3B311] ml-auto mr-auto'
                       >
                         Submit
                       </button>
