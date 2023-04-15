@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import styles from '../styles/AudioPlayer.module.css'
 import apple from '../assets/apple.mp3'
 
-export default function MainPlayer({ playingFile, startPlaying }) {
-  const [isPlaying, setIsPlaying] = useState(false)
+export default function MainPlayer({ playingFile, isPlaying, setIsPlaying }) {
+  // const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
 
@@ -17,14 +17,14 @@ export default function MainPlayer({ playingFile, startPlaying }) {
   //   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
   useEffect(() => {
-    if (startPlaying) {
+    if (isPlaying) {
       audioPlayer.current.play()
       animationRef.current = requestAnimationFrame(whilePlaying)
     } else {
       audioPlayer.current.pause()
       cancelAnimationFrame(animationRef.current)
     }
-  }, [startPlaying, playingFile, isPlaying])
+  }, [playingFile, isPlaying, currentTime, duration])
 
   function onLoadedMetadata() {
     const seconds = Math.floor(audioPlayer.current?.duration)
@@ -97,7 +97,7 @@ export default function MainPlayer({ playingFile, startPlaying }) {
   return (
     <div className='lg:h-[16vh] h-24 bg-main-dark flex justify-center text-white lg:gap-5 gap-2 pl-2 lg:pl-0 items-center lg:w-full w-full'>
       <audio
-        onLoadedMetadata={onLoadedMetadata}
+        onLoadedMetadata={(e) => onLoadedMetadata(e)}
         ref={audioPlayer}
         src={playingFile}
       >
