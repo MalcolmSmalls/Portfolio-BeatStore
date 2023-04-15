@@ -69,7 +69,7 @@ export default function BeatScreen() {
           </section>
 
           <div className='flex lg:flex-row flex-col items-center lg:items-start lg:justify-center font-Poppins text-sm w-full  mt-10  lg:gap-20 gap-5'>
-            <div className='flex lg:flex-col lg:w-1/3 w-full justify-center lg:items-end '>
+            <div className='flex lg:flex-col lg:w-1/3 w-full justify-center lg:items-end'>
               <img
                 className='object-cover h-96 w-96'
                 src={beat.image}
@@ -113,7 +113,7 @@ export default function BeatScreen() {
             <h2 className='lg:text-9xl text-8xl mb-5 text-center lg:mt-0 mt-5'>
               Reviews
             </h2>
-            <div className='w-screen flex lg:flex-row flex-col'>
+            <div className='w-full flex lg:flex-row flex-col'>
               <div className='lg:w-[50%] w-[90%] font-Poppins text-left pl-[10%] p-5'>
                 {beat.reviews.length === 0 && <p>No Reviews</p>}
                 <ul>

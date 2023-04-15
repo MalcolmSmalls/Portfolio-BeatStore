@@ -57,7 +57,7 @@ export default function Waveform({ url, beatId }) {
     navigate(`/beat/${beatId}`)
   }
   return (
-    <div className='w-screen flex flex-col items-center justify-center mt-10 text-sm'>
+    <div className='w-full flex flex-col items-center justify-center mt-10 text-sm'>
       <div id='waveform' className='lg:w-1/2 w-[90%]'></div>
       <div className='flex justify-center items-center  gap-2 mt-4'>
         <div className='flex flex-col items-center justify-center '>
