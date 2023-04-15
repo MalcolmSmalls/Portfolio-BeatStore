@@ -33,7 +33,7 @@ export default function HomeScreen({ handleClick, isPlaying, target }) {
         <h1>{error}</h1>
       ) : (
         <>
-          <ul className='container flex flex-col lg:h-[108vh] h-fit w-[90vw]'>
+          <ul className='container flex flex-col lg:min-h-fit h-fit w-[90vw]'>
             {beats.map((beat) => (
               <Beat
                 beat={beat}

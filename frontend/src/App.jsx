@@ -30,7 +30,6 @@ function App() {
     if (beats[0]) {
       setPlayingFile(beats[0].file)
     }
-    console.log(isPlaying)
   }, [beats])
 
   const handleClick = (e, beat) => {
