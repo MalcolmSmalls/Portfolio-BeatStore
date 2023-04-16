@@ -25,7 +25,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
     }
     waveform.current.load(url)
     setIsPlaying(false)
-  }, [url])
+  }, [url, location])
 
   const playAudio = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying)

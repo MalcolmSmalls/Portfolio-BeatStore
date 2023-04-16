@@ -30,19 +30,19 @@ export default function CartScreen() {
   return (
     <div>
       {cartItems.length === 0 ? (
-        <div className='flex flex-col justify-center items-center w-screen h-[82vh] gap-5 font-Poppins '>
+        <div className='flex flex-col justify-center items-center w-screen min-h-[82vh] gap-5 font-Poppins '>
           <p className='text-6xl'>Your cart is empty</p>
           <button className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-2xl tracking-widest hover:bg-main-dark '>
             <Link to='/'>Go Back</Link>
           </button>
         </div>
       ) : (
-        <div className='border-8 w-[90vw] h-[82vh] flex pt-10 text-xl font-Poppins '>
-          <div className='left border-2 w-[10%] flex justify-center '>
+        <div className='border-8 w-[90vw] min-h-[82vh] flex pt-10 text-xl font-Poppins '>
+          <div className='left border-2 w-[10%] flex justify-center invisible lg:visible '>
             <ul className='mt-10'>
               {cartItems.map((item) => (
                 <>
-                  <li className='border-2 h-20 flex items-center'>
+                  <li className='border-2 lg:h-20 invisible lg:visible flex items-center'>
                     <img
                       src={item.image}
                       alt={item.name}
@@ -53,13 +53,13 @@ export default function CartScreen() {
               ))}
             </ul>
           </div>
-          <div className='mid border-2 w-[30%]'>
+          <div className='mid border-2 lg:w-[30%] w-[100%]'>
             <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
               Item
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center text-sm font-bold'>
+                <li className='border-2 h-20 flex items-center lg:text-sm text-xs font-bold'>
                   <Link to={`/beat/${item.beat}`}>
                     {item.name} (Produced by Malcolm Smalls)
                   </Link>
@@ -67,25 +67,25 @@ export default function CartScreen() {
               ))}
             </ul>
           </div>
-          <div className='right border-2 w-[20%]'>
+          <div className='right border-2 lg:w-[20%] w-[100%]'>
             <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
               Price
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center text-2xl font-bold'>
+                <li className='border-2 h-20 flex items-center lg:text-2xl text-base font-bold'>
                   ${item.price}
                 </li>
               ))}
             </ul>
           </div>
-          <div className='right border-2 w-[10%]'>
+          <div className='right border-2 lg:w-[10%] w-[100%]'>
             <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
               Remove
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center justify-center text-2xl font-bold'>
+                <li className='border-2 h-20 flex items-center justify-center lg:text-2xl text-base font-bold'>
                   <button
                     type='button'
                     onClick={() => removeFromCartHandler(item.beat)}
@@ -97,13 +97,13 @@ export default function CartScreen() {
               ))}
             </ul>
           </div>
-          <div className='right-col border-2 w-[30%]'>
+          <div className='right-col border-2 lg:w-[30%] w-[100%]'>
             <div className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
               <h2>Subtotal ({cartItems.length}) items</h2>
             </div>
-            <div className='flex p-5'>
-              <p className='w-[50%] font-bold text-golden'>Total</p>
-              <p className='w-[50%] font-bold text-golden flex justify-end'>
+            <div className='flex p-5 lg:flex-row flex-col items-center'>
+              <p className='lg:w-[50%] font-bold text-golden'>Total</p>
+              <p className='lg:w-[50%] font-bold text-golden flex justify-end'>
                 $
                 {cartItems
                   .reduce((acc, item) => acc + item.price, 0)
