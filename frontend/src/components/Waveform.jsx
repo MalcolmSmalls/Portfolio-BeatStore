@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Wavesurfer from 'wavesurfer.js'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-export default function Waveform({ url, beatId }) {
+export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
   const waveform = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [hoverElement, setHoverElement] = useState(null)
@@ -44,18 +44,13 @@ export default function Waveform({ url, beatId }) {
   }
 
   const navigate = useNavigate()
-  const prevBeat = () => {
-    // if (beatID === 1) {
-    //   navigate(`/beat/1`)
-    // } else {
-    //   navigate(`/beat/${beatID - 1}`)
-    // }
-    navigate(`/beat/${Number(beatId) - 1}`)
-  }
 
-  const nextBeat = () => {
-    navigate(`/beat/${beatId}`)
-  }
+  //   navigate(`/beat/${Number(beatId) - 1}`)
+  // }
+
+  // const nextBeat = () => {
+  //   navigate(`/beat/${beatId}`)
+  // }
   return (
     <div className='w-full flex flex-col items-center justify-center mt-10 text-sm'>
       <div id='waveform' className='lg:w-1/2 w-[90%]'></div>
@@ -63,7 +58,7 @@ export default function Waveform({ url, beatId }) {
         <div className='flex flex-col items-center justify-center '>
           <button
             id='goBack'
-            onClick={prevBeat}
+            onClick={() => navigate(`/beat/${prevBeat()}`)}
             onMouseEnter={(e) => setHoverElement(e.target.id)}
             onMouseLeave={() => setHoverElement(null)}
             className='border-golden border-4 rounded-full h-10 w-10 text-golden hover:border-lighter-dark hover:text-lighter-dark'
@@ -127,7 +122,7 @@ export default function Waveform({ url, beatId }) {
 
         <div className='flex flex-col items-center'>
           <button
-            onClick={nextBeat}
+            onClick={() => navigate(`/beat/${nextBeat()}`)}
             id='toNextTrack'
             className='border-golden border-4 rounded-full h-10 w-10 text-golden hover:border-lighter-dark hover:text-lighter-dark'
             onMouseEnter={(e) => setHoverElement(e.target.id)}

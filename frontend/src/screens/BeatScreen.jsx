@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Waveform } from '../components'
 import { Rating } from '../components'
-import { listBeatDetails, createBeatReview } from '../actions/beatActions'
+import {
+  listBeatDetails,
+  createBeatReview,
+  listBeats,
+} from '../actions/beatActions'
 import { BEAT_CREATE_REVIEW_RESET } from '../constants/beatConstants'
 import Meta from '../components/Meta'
 
@@ -18,6 +22,16 @@ export default function BeatScreen() {
 
   const beatDetails = useSelector((state) => state.beatDetails)
   const { loading, error, beat } = beatDetails
+
+  const beatList = useSelector((state) => state.beatList)
+
+  const {
+    loading: loadingBeat,
+    error: errorBeat,
+    beats,
+    page,
+    pages,
+  } = beatList
 
   const beatCreateReview = useSelector((state) => state.beatCreateReview)
   const { error: errorBeatReview, success: successBeatReview } =
@@ -34,10 +48,41 @@ export default function BeatScreen() {
       dispatch({ type: BEAT_CREATE_REVIEW_RESET })
     }
     dispatch(listBeatDetails(id))
+    dispatch(listBeats())
   }, [dispatch, id, successBeatReview])
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}`)
+  }
+
+  const nextBeat = () => {
+    let nextBeat
+    beats.forEach((item, index) => {
+      if (item._id === id) {
+        if (index === beats.length - 1) {
+          nextBeat = beats[0]._id
+        } else {
+          nextBeat = beats[index + 1]._id
+        }
+      }
+    })
+
+    return nextBeat
+  }
+
+  const prevBeat = () => {
+    let prevBeat
+    beats.forEach((item, index) => {
+      if (item._id === id) {
+        if (index === 0) {
+          prevBeat = beats[beats.length - 1]._id
+        } else {
+          prevBeat = beats[index - 1]._id
+        }
+      }
+    })
+
+    return prevBeat
   }
 
   const submitHandler = (e) => {
@@ -107,7 +152,12 @@ export default function BeatScreen() {
             </div>
           </div>
           <div className='w-full'>
-            <Waveform url={beat.file} beatId={beat._id} />
+            <Waveform
+              url={beat.file}
+              beatId={beat._id}
+              prevBeat={prevBeat}
+              nextBeat={nextBeat}
+            />
           </div>
           <div className='text-sm '>
             <h2 className='lg:text-9xl text-8xl mb-5 text-center lg:mt-0 mt-5'>
