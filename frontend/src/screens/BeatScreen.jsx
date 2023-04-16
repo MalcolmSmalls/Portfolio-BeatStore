@@ -163,8 +163,8 @@ export default function BeatScreen() {
             <h2 className='lg:text-9xl text-8xl mb-5 text-center lg:mt-0 mt-5'>
               Reviews
             </h2>
-            <div className='w-full flex lg:flex-row flex-col'>
-              <div className='lg:w-[50%] w-[90%] font-Poppins text-left pl-[10%] p-5'>
+            <div className='min-w-[98vw] flex lg:flex-row flex-col'>
+              <div className='lg:w-[50%] w-[90%] font-Poppins text-left pl-[10%] p-5 '>
                 {beat.reviews.length === 0 && <p>No Reviews</p>}
                 <ul>
                   {beat.reviews.map((review) => (
