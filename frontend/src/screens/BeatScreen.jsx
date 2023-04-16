@@ -163,7 +163,7 @@ export default function BeatScreen() {
             <h2 className='lg:text-9xl text-8xl mb-5 text-center lg:mt-0 mt-5'>
               Reviews
             </h2>
-            <div className='min-w-[98vw] flex lg:flex-row flex-col'>
+            <div className='lg:min-w-[98vw] w-full flex lg:flex-row flex-col'>
               <div className='lg:w-[50%] w-[90%] font-Poppins text-left pl-[10%] p-5 '>
                 {beat.reviews.length === 0 && <p>No Reviews</p>}
                 <ul>
@@ -205,10 +205,10 @@ export default function BeatScreen() {
                     </select>
 
                     <h3 className='pt-2 text-xs'>Comment</h3>
-                    <div className='flex flex-col gap-2 w-[90vw] lg:w-full'>
+                    <div className='flex flex-col gap-2 w-[85vw] lg:w-full'>
                       <textarea
                         onChange={(e) => setComment(e.target.value)}
-                        className='border-2 lg:w-[60%] w-[90vw] h-[100px] rounded mb-4 lg-mb-0'
+                        className='border-2 lg:w-[60%] w-full h-[100px] rounded mb-4 lg-mb-0'
                       />
                       <button
                         type='submit'

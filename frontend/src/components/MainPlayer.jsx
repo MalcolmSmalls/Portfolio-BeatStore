@@ -95,7 +95,7 @@ export default function MainPlayer({ playingFile, isPlaying, setIsPlaying }) {
   }
 
   return (
-    <div className='lg:min-h-[5rem] min-h-24 bg-main-dark flex justify-center text-white lg:gap-5 gap-2 pl-2 lg:pl-0 items-center lg:w-full w-full'>
+    <div className='min-h-[5rem] bg-main-dark flex justify-center text-white lg:gap-5 gap-2 pl-2 lg:pl-0 items-center lg:w-full w-full'>
       <audio
         onLoadedMetadata={(e) => onLoadedMetadata(e)}
         ref={audioPlayer}
