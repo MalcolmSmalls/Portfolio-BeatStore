@@ -8,6 +8,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
   const [hoverElement, setHoverElement] = useState(null)
   const [beatID, setBeatID] = useState(Number(beatId))
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!waveform.current) {
@@ -24,7 +25,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
     }
     waveform.current.load(url)
     setIsPlaying(false)
-  }, [location])
+  }, [url])
 
   const playAudio = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying)
@@ -42,8 +43,6 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
       return 'invisible'
     }
   }
-
-  const navigate = useNavigate()
 
   //   navigate(`/beat/${Number(beatId) - 1}`)
   // }
