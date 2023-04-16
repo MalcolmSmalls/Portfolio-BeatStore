@@ -212,7 +212,7 @@ export default function BeatScreen() {
                       />
                       <button
                         type='submit'
-                        className='border-2 p-1 w-20 rounded bg-golden hover:bg-[#F3B311] ml-auto mr-auto'
+                        className='border-2 p-1 w-20 rounded bg-golden hover:bg-[#F3B311] lg:ml-0 lg:mr-0 ml-auto mr-auto'
                       >
                         Submit
                       </button>
