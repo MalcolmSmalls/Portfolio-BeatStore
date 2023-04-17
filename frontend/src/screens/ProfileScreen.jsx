@@ -48,8 +48,8 @@ export default function ProfileScreen() {
     }
   }
   return (
-    <div className='w-screen flex'>
-      <div className='left w-[45%] text-lg flex flex-col items-center'>
+    <div className='w-full flex lg:flex-row flex-col justify-center items-center lg:items-start '>
+      <div className='left lg:w-[45%] w-full text-lg flex flex-col items-center'>
         <h3 className='text-5xl p-10 text-golden'>My Profile</h3>
         {error && <h2 className='text-red-500'>{error}</h2>}
         {success && (
@@ -57,7 +57,7 @@ export default function ProfileScreen() {
         )}
         {message && <h2 className='text-red-500'>{message}</h2>}
         {loading && <h2>Loading...</h2>}
-        <div className='flex items-center w-[60%]'>
+        <div className='flex items-center flex-col lg:flex-row lg:w-[60%]'>
           <form
             onSubmit={submitHandler}
             className='flex items-start flex-col w-[100%] font-Poppins'
@@ -122,7 +122,7 @@ export default function ProfileScreen() {
           </form>
         </div>
       </div>
-      <div className='right border-2 w-[50%] text-lg'>
+      <div className='right  lg:w-[50%] w-[98%] text-lg'>
         <h3 className='text-5xl pb-10 pt-10 text-center text-golden'>
           My Orders
         </h3>
@@ -131,7 +131,7 @@ export default function ProfileScreen() {
         ) : errorOrders ? (
           <p>{errorOrders}</p>
         ) : (
-          <table className='border-2 w-full font-Poppins text-center text-sm'>
+          <table className='border-2 w-full font-Poppins text-center text-xs lg:text-sm'>
             <thead className='border-2'>
               <tr>
                 <th>ID</th>
