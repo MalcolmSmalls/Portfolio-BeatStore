@@ -12,7 +12,8 @@ export default function CartScreen() {
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
-  console.log(cartItems)
+  // console.log(cartItems)
+  const userLogin = useSelector((state) => state.userLogin)
 
   useEffect(() => {
     if (id) {
@@ -25,7 +26,11 @@ export default function CartScreen() {
   }
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=payment')
+    if (userLogin) {
+      navigate('/payment')
+    } else {
+      navigate('/login')
+    }
   }
   return (
     <div>
