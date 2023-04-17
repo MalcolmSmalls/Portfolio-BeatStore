@@ -33,7 +33,7 @@ export default function PaymentScreen() {
 
       <form
         onSubmit={submitHandler}
-        className='flex items-start flex-col lg:w-[30%] w-[50%] font-Poppins'
+        className='flex items-start flex-col lg:w-[30%] w-[60%] font-Poppins'
       >
         <h2 className='mb-2 text-sm font-bold'>Select Payment Method:</h2>
         <div className='flex gap-1'>
