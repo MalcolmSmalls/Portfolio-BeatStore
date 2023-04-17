@@ -37,29 +37,29 @@ export default function CartScreen() {
           </button>
         </div>
       ) : (
-        <div className='border-8 w-[90vw] min-h-[82vh] flex pt-10 text-xl font-Poppins '>
-          <div className='left border-2 w-[10%] flex justify-center invisible lg:visible '>
-            <ul className='mt-10'>
+        <div className='w-[90vw]  min-h-[82vh] flex justify-center pt-10 text-xl font-Poppins '>
+          <div className='left w-0  lg:w-[10%] lg:flex justify-center  items-center invisible lg:visible'>
+            <ul className='mt-10 invisible lg:visible'>
               {cartItems.map((item) => (
                 <>
-                  <li className='border-2 lg:h-20 invisible lg:visible flex items-center'>
+                  <li className='lg:h-20 invisible lg:visible display:flex items-center pt-2'>
                     <img
                       src={item.image}
                       alt={item.name}
-                      className='object-cover rounded w-16 h-16'
+                      className='object-cover rounded lg:w-16 h-16 invisible lg:visible'
                     />
                   </li>
                 </>
               ))}
             </ul>
           </div>
-          <div className='mid border-2 lg:w-[30%] w-[100%]'>
-            <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+          <div className='mid lg:w-[25%] w-[30%] flex-none'>
+            <h2 className='h-10 uppercase flex  justify-center text-sm items-center font-bold'>
               Item
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center lg:text-sm text-xs font-bold'>
+                <li className='h-20 flex items-center lg:text-sm text-xs font-normal lg:text-left text-center'>
                   <Link to={`/beat/${item.beat}`}>
                     {item.name} (Produced by Malcolm Smalls)
                   </Link>
@@ -67,25 +67,25 @@ export default function CartScreen() {
               ))}
             </ul>
           </div>
-          <div className='right border-2 lg:w-[20%] w-[100%]'>
-            <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+          <div className='right lg:w-[10%] w-[20%] flex-none'>
+            <h2 className='h-10 uppercase flex justify-center text-sm items-center font-bold'>
               Price
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center lg:text-2xl text-base font-bold'>
+                <li className='h-20 flex items-center lg:text-xl text-base font-normal  justify-center '>
                   ${item.price}
                 </li>
               ))}
             </ul>
           </div>
-          <div className='right border-2 lg:w-[10%] w-[100%]'>
-            <h2 className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
+          <div className='right lg:w-[10%] w-[20%] flex-none'>
+            <h2 className='h-10 uppercase flex justify-center text-sm items-center font-bold'>
               Remove
             </h2>
             <ul>
               {cartItems.map((item) => (
-                <li className='border-2 h-20 flex items-center justify-center lg:text-2xl text-base font-bold'>
+                <li className='h-20 flex items-center justify-center lg:text-2xl text-base font-bold'>
                   <button
                     type='button'
                     onClick={() => removeFromCartHandler(item.beat)}
@@ -97,13 +97,17 @@ export default function CartScreen() {
               ))}
             </ul>
           </div>
-          <div className='right-col border-2 lg:w-[30%] w-[100%]'>
-            <div className='border-2 h-10 uppercase flex justify-center text-sm items-center'>
-              <h2>Subtotal ({cartItems.length}) items</h2>
+          <div className='right-col lg:w-[30%] w-[32%] flex-none'>
+            <div className='border-2 h-10 uppercase flex justify-center text-xs lg:text-sm items-center font-bold'>
+              <h2 className='text-center'>
+                Subtotal ({cartItems.length}) items
+              </h2>
             </div>
             <div className='flex p-5 lg:flex-row flex-col items-center'>
-              <p className='lg:w-[50%] font-bold text-golden'>Total</p>
-              <p className='lg:w-[50%] font-bold text-golden flex justify-end'>
+              <p className='lg:w-[50%] font-bold text-golden invisible lg:visible'>
+                Total
+              </p>
+              <p className='lg:w-[50%] text-golden flex justify-end font-bold'>
                 $
                 {cartItems
                   .reduce((acc, item) => acc + item.price, 0)
@@ -112,11 +116,14 @@ export default function CartScreen() {
             </div>
             <div className='w-full flex justify-center'>
               <button
-                className='w-[80%]  uppercase  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark'
+                className='w-[90%]  uppercase  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
-                Proceed To Checkout
+                <span className='invisible hidden lg:inline lg:visible'>
+                  Proceed To{' '}
+                </span>
+                Checkout
               </button>
             </div>
           </div>
