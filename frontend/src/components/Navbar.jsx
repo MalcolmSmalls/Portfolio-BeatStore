@@ -31,7 +31,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <a href='#beats' className='hover:text-main-dark'>
+            <a href='/#beats' className='hover:text-main-dark'>
               Beats
             </a>
           </li>

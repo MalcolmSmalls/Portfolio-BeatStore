@@ -33,13 +33,13 @@ export default function RegisterScreen() {
   }
   return (
     <FormContainer>
-      <h1 className='text-9xl mt-10 text-golden'>Sign Up</h1>
+      <h1 className='text-9xl mt-10 text-golden mb-5'>Sign Up</h1>
       {error && <h2 className='text-red-500'>{error}</h2>}
       {message && <h2 className='text-red-500'>{message}</h2>}
       {loading && <h2>Loading...</h2>}
       <form
         onSubmit={submitHandler}
-        className='flex items-center flex-col w-[30%] font-Poppins'
+        className='flex items-center flex-col lg:w-[30%] w-[35%] font-Poppins'
       >
         <label htmlFor='name' className='text-sm uppercase font-bold'>
           Name
@@ -50,7 +50,7 @@ export default function RegisterScreen() {
           onChange={(e) => setName(e.target.value)}
           placeholder='Enter your name'
           id='name'
-          className='border-2 rounded p-1 w-[80%] mb-5'
+          className='border-2 rounded p-1 lg:w-[80%] mb-5 w-[13rem]'
         />
         <label htmlFor='email' className='text-sm uppercase font-bold'>
           E-Mail Address
@@ -61,7 +61,7 @@ export default function RegisterScreen() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder='Enter your email'
           id='email'
-          className='border-2 rounded p-1 w-[80%] mb-5'
+          className='border-2 rounded p-1 lg:w-[80%] mb-5 w-[13rem]'
         />
         <label htmlFor='password' className='text-sm uppercase font-bold'>
           Password
@@ -72,7 +72,7 @@ export default function RegisterScreen() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder='Enter your password'
           id='password'
-          className='border-2 rounded p-1 w-[80%]'
+          className='border-2 rounded p-1 lg:w-[80%] w-[13rem] mb-5'
         />
 
         <label
@@ -87,7 +87,7 @@ export default function RegisterScreen() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder='Confirm your password'
           id='confirmPassword'
-          className='border-2 rounded p-1 w-[80%]'
+          className='border-2 rounded p-1 lg:w-[80%]  w-[13rem]'
         />
         <button
           type='submit'
