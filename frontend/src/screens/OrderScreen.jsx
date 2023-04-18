@@ -67,12 +67,13 @@ export default function OrderScreen() {
     <h2>{error}</h2>
   ) : (
     <>
-      <div className='text-sm w-screen flex flex-col items-center'>
-        <h1 className='text-golden text-2xl font-PressStart mt-10'>
-          Order {orderId}
+      <div className='text-sm w-full flex flex-col items-center'>
+        <h1 className='text-golden lg:text-2xl text-xl uppercase text-center font-PressStart mt-10'>
+          Order{' '}
+          <span className='lg:text-2xl text-sm block pb-5'>{orderId}</span>
         </h1>
-        <div className='border-2 w-9/12 p-5 flex'>
-          <div className='w-1/2'>
+        <div className='lg:w-9/12 p-5 flex lg:flex-row flex-col items-center justify-center'>
+          <div className='lg:w-1/2 w-full'>
             <h2 className='text-golden text-2xl'>Information</h2>
             <div className='font-Poppins pb-5'>
               <p>Name: {order.user.name}</p>
@@ -91,7 +92,7 @@ export default function OrderScreen() {
             {order.orderItems.length === 0 ? (
               <span>Order is empty</span>
             ) : (
-              <div className='border-2 font-Poppins'>
+              <div className='font-Poppins'>
                 <ul>
                   {order.orderItems.map((item, index) => (
                     <div className='flex p-3 items-center gap-3'>
@@ -110,7 +111,7 @@ export default function OrderScreen() {
                         </p>
                       </div>
                       <div>
-                        <div className='pl-60'>
+                        <div className='lg:pl-60 pl-10'>
                           <span>${item.price}</span>
                         </div>
                       </div>
@@ -120,31 +121,33 @@ export default function OrderScreen() {
               </div>
             )}
           </div>
-          <div className='border-2 w-1/2 flex flex-col p-5'>
+          <div className='flex flex-col lg:w-1/2 w-full'>
             <h2 className='text-golden text-2xl'>Order Summary</h2>
-            <div className='flex flex-col items-center pt-6'>
-              <div className='flex items-center gap-20'>
-                <p className='text-xs '>Total Price </p>
+            <div className='w-full flex flex-col p-5'>
+              <div className='flex flex-col items-center pt-6'>
+                <div className='flex items-center gap-20'>
+                  <p className='text-xs '>Total Price </p>
 
-                <p className='text-2xl'>${order.totalPrice}</p>
-              </div>
-
-              {error && (
-                <p className='text-red-500 pt-5  text-center'>{error}</p>
-              )}
-              {!order.isPaid && (
-                <div>
-                  {loadingPay && <h2>Loading</h2>}
-                  {!sdkReady ? (
-                    <h2>Loading</h2>
-                  ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
-                  )}
+                  <p className='text-2xl'>${order.totalPrice}</p>
                 </div>
-              )}
+
+                {error && (
+                  <p className='text-red-500 pt-5  text-center'>{error}</p>
+                )}
+                {!order.isPaid && (
+                  <div>
+                    {loadingPay && <h2>Loading</h2>}
+                    {!sdkReady ? (
+                      <h2>Loading</h2>
+                    ) : (
+                      <PayPalButton
+                        amount={order.totalPrice}
+                        onSuccess={successPaymentHandler}
+                      />
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
