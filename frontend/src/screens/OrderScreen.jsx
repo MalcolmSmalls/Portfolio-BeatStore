@@ -71,7 +71,7 @@ export default function OrderScreen() {
           Order{' '}
           <span className='lg:text-2xl text-sm block pb-5'>{orderId}</span>
         </h1>
-        <div className='lg:w-9/12 p-5 flex lg:flex-row flex-col items-center justify-center'>
+        <div className='lg:w-9/12 p-5 flex lg:flex-row flex-col items-center justify-center '>
           <div className='lg:w-1/2 w-full'>
             <h2 className='text-golden text-2xl'>Information</h2>
             <div className='font-Poppins pb-5'>
@@ -110,7 +110,7 @@ export default function OrderScreen() {
                         </p>
                       </div>
                       <div>
-                        <div className='lg:pl-60 pl-10'>
+                        <div className='lg:pl-52 pl-10'>
                           <span>${item.price}</span>
                         </div>
                       </div>
@@ -120,21 +120,23 @@ export default function OrderScreen() {
               </div>
             )}
           </div>
-          <div className='flex flex-col lg:w-1/2 w-full'>
+          <div className='flex flex-col lg:w-1/2 w-full lg:h-96'>
             <h2 className='text-golden text-2xl'>Order Summary</h2>
-            <div className='w-full flex flex-col p-5'>
-              <div className='flex flex-col items-center pt-6'>
-                <div className='flex items-center gap-20'>
+            <div className='w-full flex flex-col'>
+              <div className='flex flex-col pt-6'>
+                <div className='lg:flex items-center gap-20 mb-5 text-center'>
                   <p className='text-xs '>Total Price </p>
 
-                  <p className='text-2xl'>${order.totalPrice}</p>
+                  <p className='text-2xl block lg:inline'>
+                    ${order.totalPrice}
+                  </p>
                 </div>
 
                 {error && (
                   <p className='text-red-500 pt-5  text-center'>{error}</p>
                 )}
                 {!order.isPaid && (
-                  <div>
+                  <div className='w-full'>
                     {loadingPay && <h2>Loading</h2>}
                     {!sdkReady ? (
                       <h2>Loading</h2>
