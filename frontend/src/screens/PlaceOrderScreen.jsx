@@ -37,10 +37,10 @@ export default function PlaceOrderScreen() {
     )
   }
   return (
-    <div className='text-sm w-screen flex flex-col items-center'>
+    <div className='text-sm lg:w-screen w-full flex flex-col items-center'>
       <CheckoutSteps step1 step2 step3 />
-      <div className='border-2 w-9/12 p-5 flex'>
-        <div className='w-1/2'>
+      <div className='lg:w-9/12 w-[100%] p-5 flex lg:flex-row flex-col'>
+        <div className='lg:w-1/2 w-full'>
           <h2 className='text-golden text-2xl'>Payment Method</h2>
 
           <p className='font-Poppins'>{cart.paymentMethod}</p>
@@ -49,7 +49,7 @@ export default function PlaceOrderScreen() {
           {cart.cartItems.length === 0 ? (
             <span>Your cart is empty</span>
           ) : (
-            <div className='border-2 font-Poppins'>
+            <div className='font-Poppins'>
               <ul>
                 {cart.cartItems.map((item, index) => (
                   <div className='flex p-3 items-center gap-3'>
@@ -64,11 +64,11 @@ export default function PlaceOrderScreen() {
                       </li>
 
                       <p className='text-gray-400 text-xs'>
-                        Crafted by Malcolm Smalls
+                        Produced by Malcolm Smalls
                       </p>
                     </div>
                     <div>
-                      <div className='ml-60'>
+                      <div className='lg:ml-40 ml-10'>
                         <span>${item.price}</span>
                       </div>
                     </div>
@@ -78,25 +78,32 @@ export default function PlaceOrderScreen() {
             </div>
           )}
         </div>
-        <div className='border-2 w-1/2 flex flex-col p-5'>
-          <h2 className='text-golden text-2xl'>Order Summary</h2>
-          <div className='flex flex-col items-center pt-6'>
-            <div className='flex items-center gap-20'>
-              <p className='text-xs '>Total Price </p>
+        <div className='lg:w-1/2 w-full flex-col pt-5'>
+          <h2 className='text-golden text-2xl w-1/2 h-fit'>Order Summary</h2>
+          <div className='lg:w-1/2 w-full flex flex-col p-5'>
+            {/* <h2 className='text-golden text-2xl invisible lg:visible'>
+            Order Summary
+          </h2> */}
+            <div className='flex flex-col pt-6   items-center border-2 w-96'>
+              <div className='flex items-center gap-20 '>
+                <p className='text-xs '>Total Price </p>
 
-              <p className='text-2xl'>${cart.totalPrice}</p>
+                <p className='text-2xl'>${cart.totalPrice}</p>
+              </div>
+
+              {error && (
+                <p className='text-red-500 pt-5 text-center'>{error}</p>
+              )}
+
+              <button
+                type='submit'
+                disabled={cart.cartItems === 0}
+                className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark w-[70%] mt-6 mb-10 font-Poppins'
+                onClick={placeOrderHandler}
+              >
+                Place Order
+              </button>
             </div>
-
-            {error && <p className='text-red-500 pt-5  text-center'>{error}</p>}
-
-            <button
-              type='submit'
-              disabled={cart.cartItems === 0}
-              className='uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark w-[50%] mt-6 mb-10 font-Poppins'
-              onClick={placeOrderHandler}
-            >
-              Place Order
-            </button>
           </div>
         </div>
       </div>

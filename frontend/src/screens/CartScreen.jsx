@@ -107,7 +107,7 @@ export default function CartScreen() {
               </ul>
             </div>
             <div className='right-col lg:w-[30%] w-[32%] flex-none'>
-              <div className='border-2 h-10 uppercase flex justify-center text-xs lg:text-sm items-center font-bold'>
+              <div className='border-2 h-10 uppercase flex justify-center text-xs lg:text-sm items-center font-bold ml-2'>
                 <h2 className='text-center'>
                   Subtotal ({cartItems.length}) items
                 </h2>
@@ -116,7 +116,7 @@ export default function CartScreen() {
                 <p className='lg:w-[50%] font-bold text-golden invisible lg:visible'>
                   Total
                 </p>
-                <p className='lg:w-[50%] text-golden flex justify-end font-bold'>
+                <p className='lg:w-[50%] text-golden flex justify-end font-bold mt-[-30px] lg:mt-0'>
                   $
                   {cartItems
                     .reduce((acc, item) => acc + item.price, 0)
@@ -125,7 +125,7 @@ export default function CartScreen() {
               </div>
               <div className='w-full flex justify-center'>
                 <button
-                  className='w-[90%]  uppercase  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark'
+                  className='w-[100%] lg:w-[90%]  uppercase  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark'
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >

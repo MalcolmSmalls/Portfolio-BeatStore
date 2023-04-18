@@ -31,7 +31,7 @@ export default function LoginScreen() {
       {loading && <h2>Loading...</h2>}
       <form
         onSubmit={submitHandler}
-        className='flex items-center flex-col w-[30%] font-Poppins'
+        className='flex items-center flex-col lg:w-[30%] w-[50%] font-Poppins'
       >
         <label htmlFor='email' className='text-sm uppercase font-bold'>
           E-Mail Address
