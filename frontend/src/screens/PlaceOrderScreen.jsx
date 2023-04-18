@@ -80,11 +80,11 @@ export default function PlaceOrderScreen() {
         </div>
         <div className='lg:w-1/2 w-full flex-col pt-5'>
           <h2 className='text-golden text-2xl w-1/2 h-fit'>Order Summary</h2>
-          <div className='lg:w-1/2 w-full flex flex-col p-5'>
+          <div className='lg:w-1/2 w-full flex flex-col'>
             {/* <h2 className='text-golden text-2xl invisible lg:visible'>
             Order Summary
           </h2> */}
-            <div className='flex flex-col pt-6   items-center border-2 w-96'>
+            <div className='flex flex-col pt-6   items-center lg:border-2 w-96'>
               <div className='flex items-center gap-20 '>
                 <p className='text-xs '>Total Price </p>
 

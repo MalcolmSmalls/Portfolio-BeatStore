@@ -106,7 +106,7 @@ export default function OrderScreen() {
                         </li>
 
                         <p className='text-gray-400 text-xs'>
-                          Crafted by Malcolm Smalls
+                          Produced by Malcolm Smalls
                         </p>
                       </div>
                       <div>
