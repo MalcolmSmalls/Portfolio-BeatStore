@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Hero, Navbar } from './'
 import { pic1, pic2 } from '../assets'
+import { Fragment } from 'react'
 
 function Header() {
   const slides = [
@@ -22,8 +23,8 @@ function Header() {
       <div>
         <Navbar />
         <Hero autoSlide={true} slideArr={slides}>
-          {slides.map((s) => (
-            <>
+          {slides.map((s, i) => (
+            <Fragment key={i}>
               <div
                 className='flex-none bg-center lg:bg-[0%_40%] min-h-screen w-screen bg-cover'
                 style={{
@@ -34,7 +35,7 @@ function Header() {
                   // backgroundPosition: '0% 40%',
                 }}
               ></div>
-            </>
+            </Fragment>
           ))}
           {/* {slides.map((s) => (
             <img src={s} />

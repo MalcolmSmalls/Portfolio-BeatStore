@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBeats } from '../actions/beatActions'
 import { Beat } from '../components'
@@ -36,6 +36,7 @@ export default function HomeScreen({ handleClick, isPlaying, target }) {
           <ul className='container flex flex-col lg:min-h-fit h-fit w-[90vw]'>
             {beats.map((beat) => (
               <Beat
+                key={beat._id}
                 beat={beat}
                 handleClick={handleClick}
                 isPlaying={isPlaying}

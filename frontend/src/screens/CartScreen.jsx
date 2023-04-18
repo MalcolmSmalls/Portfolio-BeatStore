@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
@@ -50,7 +50,7 @@ export default function CartScreen() {
             <div className='left w-0  lg:w-[10%] lg:flex justify-center  items-center invisible lg:visible'>
               <ul className='mt-10 invisible lg:visible'>
                 {cartItems.map((item) => (
-                  <>
+                  <Fragment key={item.beat}>
                     <li className='lg:h-20 invisible lg:visible display:flex items-center pt-2'>
                       <img
                         src={item.image}
@@ -58,7 +58,7 @@ export default function CartScreen() {
                         className='object-cover rounded lg:w-16 h-16 invisible lg:visible'
                       />
                     </li>
-                  </>
+                  </Fragment>
                 ))}
               </ul>
             </div>
@@ -68,7 +68,10 @@ export default function CartScreen() {
               </h2>
               <ul>
                 {cartItems.map((item) => (
-                  <li className='h-20 flex items-center lg:text-sm text-xs font-normal lg:text-left text-center'>
+                  <li
+                    key={item.beat}
+                    className='h-20 flex items-center lg:text-sm text-xs font-normal lg:text-left text-center'
+                  >
                     <Link to={`/beat/${item.beat}`}>
                       {item.name} (Produced by Malcolm Smalls)
                     </Link>
@@ -82,7 +85,10 @@ export default function CartScreen() {
               </h2>
               <ul>
                 {cartItems.map((item) => (
-                  <li className='h-20 flex items-center lg:text-xl text-base font-normal  justify-center '>
+                  <li
+                    key={item.beat}
+                    className='h-20 flex items-center lg:text-xl text-base font-normal  justify-center '
+                  >
                     ${item.price}
                   </li>
                 ))}
@@ -94,7 +100,10 @@ export default function CartScreen() {
               </h2>
               <ul>
                 {cartItems.map((item) => (
-                  <li className='h-20 flex items-center justify-center lg:text-2xl text-base font-bold'>
+                  <li
+                    key={item.beat}
+                    className='h-20 flex items-center justify-center lg:text-2xl text-base font-bold'
+                  >
                     <button
                       type='button'
                       onClick={() => removeFromCartHandler(item.beat)}

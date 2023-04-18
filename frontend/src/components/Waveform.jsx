@@ -62,7 +62,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
             onMouseLeave={() => setHoverElement(null)}
             className='border-golden border-4 rounded-full h-10 w-10 text-golden hover:border-lighter-dark hover:text-lighter-dark'
           >
-            <i class='fa-solid fa-backward-step'></i>
+            <i className='fa-solid fa-backward-step'></i>
           </button>
           <span className={changeHoverTextDisplay('goBack')}>
             Prev
@@ -77,7 +77,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
             onMouseEnter={(e) => setHoverElement(e.target.id)}
             onMouseLeave={() => setHoverElement(null)}
           >
-            <i class='fa-solid fa-backward'></i>
+            <i className='fa-solid fa-backward'></i>
           </button>
           <span className={changeHoverTextDisplay('backToLocation')}>
             To
@@ -93,9 +93,9 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
             onMouseLeave={() => setHoverElement(null)}
           >
             {isPlaying ? (
-              <i class='fa-solid fa-pause'></i>
+              <i className='fa-solid fa-pause'></i>
             ) : (
-              <i class='fa-solid fa-play'></i>
+              <i className='fa-solid fa-play'></i>
             )}
           </button>
           <span name='play' className={changeHoverTextDisplay('play')}>
@@ -111,7 +111,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
             onMouseEnter={(e) => setHoverElement(e.target.id)}
             onMouseLeave={() => setHoverElement(null)}
           >
-            <i class='fa-solid fa-forward'></i>
+            <i className='fa-solid fa-forward'></i>
           </button>
           <span className={changeHoverTextDisplay('forwardToSection')}>
             To
@@ -127,7 +127,7 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
             onMouseEnter={(e) => setHoverElement(e.target.id)}
             onMouseLeave={() => setHoverElement(null)}
           >
-            <i class='fa-solid fa-forward-step'></i>
+            <i className='fa-solid fa-forward-step'></i>
           </button>
           <span className={changeHoverTextDisplay('toNextTrack')}>
             Next

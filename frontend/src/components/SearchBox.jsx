@@ -20,7 +20,7 @@ export default function SearchBox() {
         onSubmit={submitHandler}
         className='flex items-center justify-center'
       >
-        <div class='relative'>
+        <div className='relative'>
           <input
             type='search'
             onChange={(e) => setKeyword(e.target.value)}

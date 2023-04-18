@@ -13,8 +13,6 @@ export default function PaymentScreen() {
 
   const { userInfo } = userLogin
 
-  console.log(userInfo)
-
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')

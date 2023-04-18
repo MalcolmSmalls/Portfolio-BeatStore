@@ -57,7 +57,6 @@ export default function OrderScreen() {
   }, [order, dispatch, orderId, successPay])
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult)
     dispatch(payOrder(orderId, paymentResult))
   }
 
@@ -95,14 +94,14 @@ export default function OrderScreen() {
               <div className='font-Poppins'>
                 <ul>
                   {order.orderItems.map((item, index) => (
-                    <div className='flex p-3 items-center gap-3'>
+                    <div className='flex p-3 items-center gap-3' key={index}>
                       <img
                         src={item.image}
                         alt={item.name}
                         className='object-cover rounded w-10 h-10'
                       />
                       <div>
-                        <li className='text-base'>
+                        <li className='text-base' key={item.name}>
                           <Link to={`/beat/${item.beat}`}>{item.name}</Link>
                         </li>
 

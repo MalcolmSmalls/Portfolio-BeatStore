@@ -13,7 +13,7 @@ export default function CheckoutSteps({ step1, step2, step3 }) {
           </Link>
         ) : (
           <span disabled className='flex items-center text-lighter-dark'>
-            <i class='fa-regular fa-circle pr-[5px] text-[7px]'></i>Log In
+            <i className='fa-regular fa-circle pr-[5px] text-[7px]'></i>Log In
           </span>
         )}
       </div>
@@ -27,7 +27,7 @@ export default function CheckoutSteps({ step1, step2, step3 }) {
           </Link>
         ) : (
           <span disabled className='flex items-center text-lighter-dark'>
-            <i class='fa-regular fa-circle pr-[5px] text-[7px]'></i>Payment
+            <i className='fa-regular fa-circle pr-[5px] text-[7px]'></i>Payment
           </span>
         )}
       </div>
@@ -42,7 +42,8 @@ export default function CheckoutSteps({ step1, step2, step3 }) {
           </Link>
         ) : (
           <span disabled className='flex items-center'>
-            <i class='fa-regular fa-circle pr-[5px] text-[7px]'></i>Place Order
+            <i className='fa-regular fa-circle pr-[5px] text-[7px]'></i>Place
+            Order
           </span>
         )}
       </div>

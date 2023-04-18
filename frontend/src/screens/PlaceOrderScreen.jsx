@@ -37,7 +37,7 @@ export default function PlaceOrderScreen() {
     )
   }
   return (
-    <div className='text-sm lg:w-screen w-full flex flex-col items-center'>
+    <div className='text-sm lg:w-full w-full flex flex-col items-center'>
       <CheckoutSteps step1 step2 step3 />
       <div className='lg:w-9/12 w-[100%] p-5 flex lg:flex-row flex-col'>
         <div className='lg:w-1/2 w-full'>
@@ -52,7 +52,7 @@ export default function PlaceOrderScreen() {
             <div className='font-Poppins'>
               <ul>
                 {cart.cartItems.map((item, index) => (
-                  <div className='flex p-3 items-center gap-3'>
+                  <div className='flex p-3 items-center gap-3' key={index}>
                     <img
                       src={item.image}
                       alt={item.name}
