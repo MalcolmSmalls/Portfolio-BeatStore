@@ -13,8 +13,9 @@ export default function LoginScreen() {
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  // const redirect = location.state ? location.state.from : '/'
 
+  const redirect = location.state ? '/payment' : '/'
   useEffect(() => {
     if (userInfo) {
       navigate(redirect)

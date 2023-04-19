@@ -1,6 +1,12 @@
 import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import {
+  Link,
+  useParams,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from 'react-router-dom'
 
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
@@ -9,11 +15,12 @@ export default function CartScreen() {
   const { id } = useParams()
 
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
   // console.log(cartItems)
-  const userLogin = useSelector((state) => state.userLogin)
+  const userLogin = useSelector((state) => state.userLogin.userInfo)
 
   useEffect(() => {
     if (id) {
@@ -29,7 +36,7 @@ export default function CartScreen() {
     if (userLogin) {
       navigate('/payment')
     } else {
-      navigate('/login')
+      navigate('/login', { state: { from: location }, replace: false })
     }
   }
   return (
