@@ -3,17 +3,23 @@ import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { getOrderDetails, payOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET } from '../constants/orderConstants'
+import { listBeats } from '../actions/beatActions'
+import fileDownload from 'js-file-download'
 
 export default function OrderScreen() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { id } = useParams()
   const [sdkReady, setSdkReady] = useState(false)
   const orderId = id
   const dispatch = useDispatch()
   const orderDetails = useSelector((state) => state.orderDetails)
+
+  const beatList = useSelector((state) => state.beatList)
+  const { beats, loading: loadingBeats, error: errorBeats } = beatList
 
   const orderPay = useSelector((state) => state.orderPay)
   const { loading: loadingPay, success: successPay } = orderPay
@@ -47,6 +53,7 @@ export default function OrderScreen() {
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch(getOrderDetails(orderId))
+      dispatch(listBeats())
     } else if (!order.isPaid) {
       if (!window.paypal) {
         addPayPalScript()
@@ -59,7 +66,14 @@ export default function OrderScreen() {
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult))
   }
-
+  const downloadFile = (file, filename) => {
+    const a = document.createElement('a')
+    a.href = file
+    a.setAttribute('download', filename)
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+  }
   return loading ? (
     <h2>Loading</h2>
   ) : error ? (
@@ -110,6 +124,13 @@ export default function OrderScreen() {
                         </p>
                       </div>
                       <div>
+                        {order.isPaid && (
+                          <button
+                            onClick={() => downloadFile(item.file, item.name)}
+                          >
+                            Download Here
+                          </button>
+                        )}
                         <div className='lg:pl-52 pl-10'>
                           <span>${item.price}</span>
                         </div>
