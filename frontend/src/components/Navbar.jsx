@@ -10,12 +10,12 @@ export default function Navbar() {
 
   const beats = useRef(null)
 
-  const scrollToSection = (elementRef) => {
-    window.scrollTo({
-      top: elementRef.current.offsetTop,
-      behavior: 'smooth',
-    })
-  }
+  // const scrollToSection = (elementRef) => {
+  //   window.scrollTo({
+  //     top: elementRef.current.offsetTop,
+  //     behavior: 'smooth',
+  //   })
+  // }
 
   const logoutHandler = () => {
     dispatch(logout())
