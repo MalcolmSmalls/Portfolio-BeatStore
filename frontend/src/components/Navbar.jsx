@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useEffect } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
 
@@ -7,7 +8,8 @@ export default function Navbar() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
+  const location = useLocation()
   const beats = useRef(null)
 
   // const scrollToSection = (elementRef) => {
@@ -16,6 +18,17 @@ export default function Navbar() {
   //     behavior: 'smooth',
   //   })
   // }
+
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1))
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    }
+  }, [location])
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -31,9 +44,9 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <a href='/#beats' className='hover:text-main-dark'>
+            <Link to='/#beats' className='hover:text-main-dark'>
               Beats
-            </a>
+            </Link>
           </li>
 
           {/* <li>

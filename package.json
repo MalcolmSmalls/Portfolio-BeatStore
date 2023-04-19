@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.9.0",
     "react-router-dom": "^6.9.0",
+    "react-router-hash-link": "^2.4.3",
     "scheduler": "^0.23.0"
   },
   "scripts": {
