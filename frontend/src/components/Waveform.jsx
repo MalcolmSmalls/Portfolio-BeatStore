@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Wavesurfer from 'wavesurfer.js'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 
 export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
   const waveform = useRef(null)
@@ -11,6 +11,13 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const firstLocation = location.pathname
+    if (location.pathname !== firstLocation) {
+      setIsPlaying(false)
+      waveform.current.pause()
+    }
+    console.log(navigate)
+    console.log(location.pathname)
     if (!waveform.current) {
       waveform.current = Wavesurfer.create({
         container: '#waveform',
@@ -25,7 +32,10 @@ export default function Waveform({ url, beatId, prevBeat, nextBeat }) {
     }
     waveform.current.load(url)
     setIsPlaying(false)
-  }, [url, location])
+    return () => {
+      waveform.current.stop()
+    }
+  }, [url])
 
   const playAudio = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying)
