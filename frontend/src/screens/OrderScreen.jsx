@@ -124,13 +124,6 @@ export default function OrderScreen() {
                         </p>
                       </div>
                       <div>
-                        {order.isPaid && (
-                          <button
-                            onClick={() => downloadFile(item.file, item.name)}
-                          >
-                            Download Here
-                          </button>
-                        )}
                         <div className='lg:pl-52 pl-10'>
                           <span>${item.price}</span>
                         </div>
@@ -169,6 +162,26 @@ export default function OrderScreen() {
                     )}
                   </div>
                 )}
+              </div>
+              <div>
+                {order.isPaid ? (
+                  <h2 className='text-golden text-2xl pb-1'>Files</h2>
+                ) : null}
+                <ul className='font-Poppins flex flex-col gap-6 text-center uppercase'>
+                  {order.isPaid
+                    ? order.orderItems.map((item) => (
+                        <li>
+                          <span>{item.name} (Produced by Malcolm Smalls)</span>
+                          <button
+                            className='ml-auto mr-auto lg:ml-0 lg:mr-0 uppercase block  bg-lighter-dark  text-white p-3 rounded-lg text-sm font-bold tracking-widest hover:bg-main-dark w-full '
+                            onClick={() => downloadFile(item.file, item.name)}
+                          >
+                            Download Here
+                          </button>
+                        </li>
+                      ))
+                    : null}
+                </ul>
               </div>
             </div>
           </div>
