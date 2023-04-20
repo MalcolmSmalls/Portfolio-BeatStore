@@ -7,7 +7,6 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { getOrderDetails, payOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET } from '../constants/orderConstants'
 import { listBeats } from '../actions/beatActions'
-import fileDownload from 'js-file-download'
 
 export default function OrderScreen() {
   const navigate = useNavigate()
@@ -50,7 +49,7 @@ export default function OrderScreen() {
       document.body.appendChild(script)
     }
 
-    if (!order || successPay) {
+    if (!order || successPay || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch(getOrderDetails(orderId))
       dispatch(listBeats())
@@ -61,7 +60,7 @@ export default function OrderScreen() {
         setSdkReady(true)
       }
     }
-  }, [order, dispatch, orderId, successPay])
+  }, [order, dispatch, orderId, successPay, id])
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult))
@@ -134,7 +133,7 @@ export default function OrderScreen() {
               </div>
             )}
           </div>
-          <div className='flex flex-col lg:w-1/2 w-full lg:h-96'>
+          <div className='flex flex-col lg:w-1/2 w-full'>
             <h2 className='text-golden text-2xl'>Order Summary</h2>
             <div className='w-full flex flex-col'>
               <div className='flex flex-col pt-6'>
